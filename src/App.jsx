@@ -2,9 +2,12 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Button } from 'react-bootstrap'
+import EmojiPicker from 'emoji-picker-react'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [showEmoji, setShowEmoji] = useState(false)
 
   return (
     <>
@@ -15,6 +18,8 @@ function App() {
         <a href="https://react.dev" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
+        <Button onClick={() => setShowEmoji(!showEmoji)} variant='success'>Emoji</Button>
+        <EmojiPicker open={showEmoji}/>
       </div>
       <h1>Vite + React</h1>
       <div className="card">
