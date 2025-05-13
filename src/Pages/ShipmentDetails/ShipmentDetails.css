@@ -1,0 +1,120 @@
+/* body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  background-color: #fff;
+} */
+
+.heading {
+font-size: 20px;
+font-weight: 600;
+line-height: 32px;
+color: rgb(10, 10, 10);
+/* border: 2px solid red; */
+}
+
+.ship-paragraph{
+font-size: 24px;
+font-weight: 600;
+line-height: 32px;
+color: rgb(10, 10, 10);
+}
+
+.ship-paragraph2{
+font-size: 14px;
+font-weight: 400;
+line-height: 20px;
+color: rgb(10, 10, 10);
+}
+
+th.text-start,
+td.text-start {
+  padding-left: 20px;    
+  padding-right: 0px;    
+  white-space: nowrap;  
+}
+
+th.text-end,
+td.text-end {
+  padding-right: 16px;   
+}
+
+.no-border-card {
+  border: none !important;
+  border-radius: 0;
+  border-top: 0.5px solid #E5E5E5 !important;
+}
+
+.search-container input {
+  font-size: 14px;
+}
+
+.table {
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: middle;
+}
+
+.table th {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+
+.table-bordered-outer {
+  border: 1px solid #EBEAEA;
+  border-radius: 5px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-bordered-outer th,
+.table-bordered-outer td {
+  border: none;
+}
+
+
+.table-bordered-outer th {
+  border-bottom: 2px solid #EBEAEA;
+}
+
+
+
+
+.clickable-cell {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.expanded-content {
+  margin: -10px;
+}
+
+.expanded-content-container .sub-heading {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.expanded-content-container .badge {
+  font-size: 13px;
+}
+
+.shipment-wrapper {
+  padding: 1rem;
+}
+
+.shipment-info-card {
+  border: none;
+  box-shadow: none;
+  background: none;
+}
+
+.shipment {
+  background-color: #f5f9fd;
+  border: 1px solid #E5E5E5;
+  border-radius: 5px;
+}
