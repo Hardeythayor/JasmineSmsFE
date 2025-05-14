@@ -7,12 +7,13 @@ import CreditHistory from './Pages/CreditHistory/CreditHistory'
 import ShipmentDetails from './Pages/ShipmentDetails/ShipmentDetails'
 import Dashboard from './Pages/Dashboard/Dashboard'
 import Thirdparty from './Pages/ThirdPartyTest/Thirdparty'
+import SendMessage from './Pages/SendMessage/SendMessage'
 
 const AppRoutes = () => {
   return (
     <Routes>
         <Route path='/'>
-            <Route index element={<BaseLayout><Login /></BaseLayout>} />
+            <Route index element={<BaseLayout><SendMessage /></BaseLayout>} />
             <Route path='dashboard' element={<BaseLayout><Dashboard /></BaseLayout>}></Route>
             <Route path='settings' element={<BaseLayout><Setting /></BaseLayout>}></Route>
             <Route path='credits' element={<BaseLayout><CreditHistory /></BaseLayout>}></Route>

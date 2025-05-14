@@ -5,7 +5,7 @@ const Dashboard = () => {
   return (
     <div className="mx-0">
       <div className="content-header-wrapper">
-        <h3 className="mb-0 content-header">Dashboard</h3>
+        <h3 className="mb-0 content-header mt-5">Dashboard</h3>
       </div>
 
       <div className="row g-4 mb-4">

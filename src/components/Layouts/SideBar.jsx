@@ -12,10 +12,10 @@ const SideBar = () => {
             </h6>
             <ul className="nav flex-column mb-2">
               <li className="nav-item paragraph2">
-                <a className="nav-link" href="#send-text" id="sidebar-send-text">
+                <NavLink className="nav-link" to="/" id="sidebar-send-text">
                   <i className="fa-regular fa-message fa-sm text-black me-3"></i>
                   Send text
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item paragraph2">
                 <NavLink

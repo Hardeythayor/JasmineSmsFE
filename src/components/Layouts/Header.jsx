@@ -27,9 +27,9 @@ const Header = () => {
             </div>
             <div className="d-flex align-items-center ms-auto">
             {/* <!-- <span className="badge rounded-pill paragraph2 d-none d-lg-inline me-4">806 cases</span> --> */}
-            <div className="dropdown d-inline shadow-sm">
+            <div className="dropdown d-inline">
                 <span
-                className="badge rounded-pill paragraph2 d-none d-lg-inline me-5 dropdown"
+                className="badge text-dark rounded-pill paragraph2 d-none d-lg-inline me-5 dropdown"
                 data-bs-toggle="dropdown"
                 role="button"
                 aria-expanded="false"
