@@ -1,5 +1,5 @@
 import React from "react";
-import "./Thirdparty.css";
+import "./ThirdParty.css";
 
 const Thirdparty = () => {
   return (
