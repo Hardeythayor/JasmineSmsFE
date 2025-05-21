@@ -54,7 +54,7 @@ const SideBar = () => {
             <ul className="nav flex-column mb-2 mt-4">
               <li className="nav-item paragraph2" style={{color: "rgb(10, 10, 10)"}}>
                 <NavLink className="nav-link" to="/settings">
-                  <i className="fas fa-cog me-3"></i>setting
+                  <i className="mdi mdi-cog-outline me-3"></i>setting
                 </NavLink>
               </li>
             </ul>

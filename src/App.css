@@ -224,6 +224,11 @@ body {
   border: 1px solid #6c757d;
 }
 
+.bg-success-light {
+  background-color: #dcfce7 !important;
+  color: #166534 !important;
+}
+
 .badge,
 .Paste {
   background-color: #f7f7f7;

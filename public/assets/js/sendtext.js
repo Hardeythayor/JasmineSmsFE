@@ -1,10 +1,10 @@
 function handleSplitSending() {
-  console.log('Initializing split sending...');
+  // console.log('Initializing split sending...');
   
   const immediateCheckbox = document.getElementById('splitSendSwitch');
   const immediateOptions = document.getElementById('immediateSplitOptions');
   
-  console.log('Immediate elements:', { immediateCheckbox, immediateOptions });
+  // console.log('Immediate elements:', { immediateCheckbox, immediateOptions });
   
   if (immediateCheckbox && immediateOptions) {
     immediateCheckbox.addEventListener('change', function() {
@@ -19,7 +19,7 @@ function handleSplitSending() {
   const reserveCheckbox = document.getElementById('reserveSplitSendSwitch');
   const reserveOptions = document.getElementById('reserveSplitOptions');
   
-  console.log('Reserve elements:', { reserveCheckbox, reserveOptions });
+  // console.log('Reserve elements:', { reserveCheckbox, reserveOptions });
   
   if (reserveCheckbox && reserveOptions) {
     reserveCheckbox.addEventListener('change', function() {
@@ -55,7 +55,7 @@ observer.observe(document.body, {
 handleSplitSending();
 
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM Content Loaded');
+  // console.log('DOM Content Loaded');
   handleSplitSending();
 });
 
@@ -65,12 +65,12 @@ tabEls.forEach(tabEl => {
 });
 
 window.addEventListener('load', () => {
-  console.log('Window loaded');
+  // console.log('Window loaded');
   handleSplitSending();
 });
 
 setInterval(() => {
-  console.log('Checking for elements...');
+  // console.log('Checking for elements...');
   handleSplitSending();
 }, 1000);
  

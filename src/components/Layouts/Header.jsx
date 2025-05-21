@@ -1,7 +1,31 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuthContext";
+import axiosInstance from "../../hooks/axiosInstance";
 
 const Header = () => {
+  const {userData, resetUser} = useAuth()
+  const navigate = useNavigate()
+
+    const logout = () => {
+        const url = '/user/auth/logout'
+        const loginPath  = '/auth/login'
+        
+
+        axiosInstance.post(url)
+            .then(res => {
+                localStorage.removeItem('userData')
+                resetUser()
+                navigate(loginPath)
+            })
+            .catch((err) => {
+                if (err.response.status == '401'){
+                    localStorage.removeItem('userData')
+                    navigate(loginPath)
+                }
+            })
+    }
+
   return (
     <>
         <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom position-fixed w-100" style={{top: 0}}>
@@ -119,33 +143,33 @@ const Header = () => {
                 </div>
 
                 <div className="dropdown">
-                    <a
-                    className="fw-semibold dropdown paragraph2 text-decoration-none"
-                    href="#"
-                    role="button"
-                    id="userDropdown"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                    <div
+                        className="fw-semibold dropdown paragraph2 text-decoration-none"
+                        href="#"
+                        role="button"
+                        id="userDropdown"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
                     >
-                    Jeongpal
-                    </a>
+                        {userData?.userInfo?.name}
+                    </div>
                     <ul
-                    className="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="userDropdown"
+                        className="dropdown-menu dropdown-menu-end mt-2 shadow-sms"
+                        aria-labelledby="userDropdown"
                     >
-                    <li>
-                        <a className="dropdown-item" href="#setting">
-                        Profile Settings
-                        </a>
-                    </li>
-                    <li>
-                        <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                        <a className="dropdown-item" href="login.html">
-                        Logout
-                        </a>
-                    </li>
+                        <li className="px-2">
+                            <NavLink className="dropdown-item" to="/settings">
+                                Profile Settings
+                            </NavLink>
+                        </li>
+                        <li>
+                            <hr className="dropdown-divider" />
+                        </li>
+                        <li className="px-2">
+                            <button className="dropdown-item" onClick={logout}>
+                                Logout
+                            </button>
+                        </li>
                     </ul>
                 </div>
                 </div>

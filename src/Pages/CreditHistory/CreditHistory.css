@@ -17,21 +17,20 @@
 }
 
 p-text {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 10px;
+  font-weight: 200;
   line-height: 20px;
   color: rgb(115, 115, 115);
 }
-table{
-    border-left: 2px solid #000; 
-    border-right: 2px solid #000;
+
+.badge-special {
+  padding: 5px 10px !important;
+  font-size: 12px !important;
+  display: flex;
+  align-items: center;
 }
 
-table.table-bordered td,
-table.table-bordered th {
-  border-left: none;
-  border-right: none;
-}
+
 
 @media (max-width: 576px) {
   th:first-child,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import BaseLayout from './components/Layouts/BaseLayout'
 import Login from './Pages/Auth/Login'
 import Setting from './Pages/Settings/Setting'
@@ -8,17 +8,26 @@ import ShipmentDetails from './Pages/ShipmentDetails/ShipmentDetails'
 import Dashboard from './Pages/Dashboard/Dashboard'
 import Thirdparty from './Pages/ThirdPartyTest/Thirdparty'
 import SendMessage from './Pages/SendMessage/SendMessage'
+import Register from './Pages/Auth/Register'
+import useAuth from './hooks/useAuthContext'
 
 const AppRoutes = () => {
+  const {userData}  = useAuth()
+
   return (
     <Routes>
         <Route path='/'>
             <Route index element={<BaseLayout><SendMessage /></BaseLayout>} />
-            <Route path='dashboard' element={<BaseLayout><Dashboard /></BaseLayout>}></Route>
-            <Route path='settings' element={<BaseLayout><Setting /></BaseLayout>}></Route>
-            <Route path='credits' element={<BaseLayout><CreditHistory /></BaseLayout>}></Route>
-            <Route path='messages' element={<BaseLayout><ShipmentDetails /></BaseLayout>}></Route>
-            <Route path='test' element={<BaseLayout><Thirdparty /></BaseLayout>}></Route>
+            <Route path='dashboard' element={userData && userData.userInfo ? <BaseLayout><Dashboard /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
+            <Route path='settings' element={userData && userData.userInfo ? <BaseLayout><Setting /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
+            <Route path='credits' element={userData && userData.userInfo ? <BaseLayout><CreditHistory /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
+            <Route path='messages' element={userData && userData.userInfo ? <BaseLayout><ShipmentDetails /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
+            <Route path='test' element={userData && userData.userInfo ? <BaseLayout><Thirdparty /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
+
+            <Route path="auth">
+                <Route path="login" element={userData && userData.userInfo ? <Navigate to='/' /> : <Login />} />
+                <Route path="register" element={userData && userData.userInfo ? <Navigate to='/' /> : <Register />} />
+            </Route>
         </Route>
     </Routes>
   )

@@ -1,0 +1,35 @@
+.emoji-section {
+    position: absolute;
+    top: 0;
+    margin-top: 155px;
+    z-index: 9999;
+}
+
+.btn-outline-secondary {
+    border-color: #dee2e6 !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: whitesmoke !important;
+}
+
+.h-9 {
+    height: 2.25rem;
+}
+
+.epr-skin-tone-select button {
+    padding: 0 !important
+}
+
+.tab-section .btn {
+    font-size: 14px;
+    height: 2.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-section .active {
+    background-color: black !important;
+    color: white !important;
+}
