@@ -17,7 +17,7 @@ const AppRoutes = () => {
   return (
     <Routes>
         <Route path='/'>
-            <Route index element={<BaseLayout><SendMessage /></BaseLayout>} />
+            <Route index element={userData && userData.userInfo ? <BaseLayout><SendMessage /></BaseLayout> : <Navigate to="/auth/login"/>} />
             <Route path='dashboard' element={userData && userData.userInfo ? <BaseLayout><Dashboard /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
             <Route path='settings' element={userData && userData.userInfo ? <BaseLayout><Setting /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
             <Route path='credits' element={userData && userData.userInfo ? <BaseLayout><CreditHistory /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>

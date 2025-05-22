@@ -8,6 +8,7 @@ import axiosInstance from "../../hooks/axiosInstance";
 const hours = shuffleArray.generateNumbersWithLeadingZeros(24);
 const minutes = shuffleArray.generateNumbersWithLeadingZeros(60);
 const validPrefixes = ['8210', '010', '10', '23490', '23470', '23481'];
+const pageLengths = [91, 182, 273, 364, 455, 546]
 const today = new Date();
 const dateString = today.toISOString().split('T')[0];
 
@@ -22,7 +23,9 @@ const SendMessage = () => {
   const [minute, setMinute] = useState("00");
   const [input, setInput] = useState('');
   const [numbers, setNumbers] = useState([]);
+  const [pages, setPages] = useState(1)
   const [error, setError] = useState('');
+  const [smsCharge, setSmsCharge] = useState(16)
 
   const [formData, setFormData] = useState({
     sendMode: "immediately",
@@ -32,7 +35,9 @@ const SendMessage = () => {
     recipients: [],
     recipientCount: "",
     content: "",
+    smsAmount: ""
   });
+  
 
   const handleDateChange = (e) => setDate(e.target.value);
 
@@ -95,6 +100,7 @@ const SendMessage = () => {
         recipients: [],
         recipientCount: "",
         content: "",
+        smsAmount: ""
     });
     setInput('')
     setNumbers([])
@@ -215,14 +221,33 @@ const handleFullInitialization = () => {
     resetForm()
 }
 
+const caclulateSmsPages = async() => {
+    let arr = []
+    pageLengths.forEach(l => {
+        if (l > formData.content.length) {
+            arr.push(l) 
+        }
+    });
+    let length = arr[0];
+    return pageLengths.indexOf(length) + 1;
+}
+
+// TO DO: fetch sms charge fro backend and replace with smsCharge variable
+const fetchSmsCharge = () => {
+    
+}
+
  const sendMessage = async(e) => {
     e.preventDefault()
     const numbers = await handleValidation();
-
+    const pageCount = await caclulateSmsPages()
+    
     if(numbers) {
         setLoading(true)
         formData.recipients = numbers
         formData.recipientCount = numbers.length
+        // fetch
+        formData.smsAmount = (pageCount * smsCharge) * numbers.length
     
         axiosInstance.post('/user/message/send', formData)
                     .then(res => {
@@ -231,7 +256,7 @@ const handleFullInitialization = () => {
                     })
                     .catch(err => {
                         console.log(err.response);
-                        toast.error("An error occured. Please, try again")
+                        toast.error(err.response.data.message)
                     })
                     .finally(() => setLoading(false))
     }
@@ -288,8 +313,8 @@ const handleFullInitialization = () => {
                     <span className="d-none d-sm-inline ms-1">Short URL</span>
                   </a>
 
-                  <span className="ms-auto small paragraph flex-shrink-0">
-                    0/70byte
+                  <span className={`ms-auto small paragraph flex-shrink-0 ${formData?.content?.length > 90 ? 'text-yellow' : ''}`}>
+                    {formData?.content?.length}/90byte
                   </span>
 
                   <button
