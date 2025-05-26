@@ -75,7 +75,7 @@ const ViewDetails = () => {
                   {reportDetails?.send_type}
                 </span>
               </div>
-              <div className="col-4">{reportDetails.created_at}</div>
+              <div className="col-4">{reportDetails?.created_at}</div>
             </div>
           </div>
 
