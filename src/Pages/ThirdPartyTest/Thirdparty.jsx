@@ -131,7 +131,7 @@ const Thirdparty = () => {
 
           setTimeout(() => {
             fetchThirdpartyTest()  
-          }, 3000);
+          }, 8000);
         })
         .catch((err) => {
           console.log(err.response);
