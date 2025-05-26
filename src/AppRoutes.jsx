@@ -10,6 +10,7 @@ import Thirdparty from './Pages/ThirdPartyTest/Thirdparty'
 import SendMessage from './Pages/SendMessage/SendMessage'
 import Register from './Pages/Auth/Register'
 import useAuth from './hooks/useAuthContext'
+import ViewDetails from './Pages/ShipmentDetails/ViewDetails'
 
 const AppRoutes = () => {
   const {userData}  = useAuth()
@@ -22,6 +23,7 @@ const AppRoutes = () => {
             <Route path='settings' element={userData && userData.userInfo ? <BaseLayout><Setting /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
             <Route path='credits' element={userData && userData.userInfo ? <BaseLayout><CreditHistory /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
             <Route path='messages' element={userData && userData.userInfo ? <BaseLayout><ShipmentDetails /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
+            <Route path='details/:id' element={userData && userData.userInfo ? <BaseLayout><ViewDetails /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
             <Route path='test' element={userData && userData.userInfo ? <BaseLayout><Thirdparty /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
 
             <Route path="auth">

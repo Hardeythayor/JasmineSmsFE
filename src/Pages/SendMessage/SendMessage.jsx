@@ -11,6 +11,8 @@ const validPrefixes = ['8210', '010', '10', '23490', '23470', '23481'];
 const pageLengths = [91, 182, 273, 364, 455, 546]
 const today = new Date();
 const dateString = today.toISOString().split('T')[0];
+const hourString = today.toISOString().split('T')[1].slice(0,2)
+const minuteString = today.toISOString().split('T')[1].slice(3,5)
 
 const SendMessage = () => {
   const textareaRef = useRef(null);
@@ -19,8 +21,8 @@ const SendMessage = () => {
   const [loading, setLoading] = useState(false)
   const [showEmoji, setShowEmoji] = useState(false);
   const [date, setDate] = useState(dateString);
-  const [hour, setHour] = useState("09");
-  const [minute, setMinute] = useState("00");
+  const [hour, setHour] = useState(hourString);
+  const [minute, setMinute] = useState(minuteString);
   const [input, setInput] = useState('');
   const [numbers, setNumbers] = useState([]);
   const [pages, setPages] = useState(1)
@@ -35,7 +37,8 @@ const SendMessage = () => {
     recipients: [],
     recipientCount: "",
     content: "",
-    smsAmount: ""
+    smsAmount: "",
+    type: 'normal'
   });
   
 
@@ -100,7 +103,8 @@ const SendMessage = () => {
         recipients: [],
         recipientCount: "",
         content: "",
-        smsAmount: ""
+        smsAmount: "",
+        type: 'normal'
     });
     setInput('')
     setNumbers([])
@@ -234,7 +238,7 @@ const caclulateSmsPages = async() => {
 
 // TO DO: fetch sms charge fro backend and replace with smsCharge variable
 const fetchSmsCharge = () => {
-    
+
 }
 
  const sendMessage = async(e) => {
@@ -597,6 +601,7 @@ const fetchSmsCharge = () => {
                 className="btn btn-dark px-5 py-2 btn-text2 w-100 send-hover"
                 id="reservation-send-btn"
                 onClick={sendMessage}
+                disabled={loading}
               >
                 {loading ? <div class="spinner-border spinner-border-sm text-light"></div> : 'Send'}
               </button>
