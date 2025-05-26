@@ -128,7 +128,10 @@ const Thirdparty = () => {
         .then((res) => {
           toast.success(res.data.message);
           resetForm();
-          fetchThirdpartyTest()
+
+          setTimeout(() => {
+            fetchThirdpartyTest()  
+          }, 3000);
         })
         .catch((err) => {
           console.log(err.response);

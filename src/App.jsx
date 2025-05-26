@@ -8,14 +8,19 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './AppRoutes'
 import { Slide, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import useAuth from './hooks/useAuthContext'
 
 function App() {
+  const {userData} = useAuth()
 
   return (
     <>
-      <Router>
-          <AppRoutes />
-      </Router>
+      {userData.authIsReady &&  (
+        <Router>
+            <AppRoutes />
+        </Router>
+      )}
+
       <ToastContainer 
         position="top-center"
         hideProgressBar
