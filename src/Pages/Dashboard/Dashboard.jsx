@@ -13,6 +13,7 @@ import { Bar } from 'react-chartjs-2';
 import axiosInstance from "../../hooks/axiosInstance";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuthContext";
+import Loader from "../../components/utilities/Loader/Loader";
 
 ChartJS.register(
   CategoryScale,
@@ -140,6 +141,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+        {analyticsLoading && <Loader />}
       </div>
 
       <div className="row g-4 mb-4">
@@ -179,6 +181,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+          {historyLoading && <Loader />}
         </div>
       </div>
 
@@ -194,6 +197,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+          {chartLoading && <Loader />}
         </div>
       </div>
     </div>

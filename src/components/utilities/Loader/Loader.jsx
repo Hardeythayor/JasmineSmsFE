@@ -13,7 +13,7 @@ export default function Loader() {
             <ClipLoader
                 color={'#ffffff'}
                 loading={true}
-                cssOverride={override}
+                // cssOverride={override}
                 size={50}
                 aria-label="Loading Spinner"
                 data-testid="loader"
