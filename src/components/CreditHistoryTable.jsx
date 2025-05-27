@@ -33,7 +33,7 @@ const CreditHistoryTable = ({creditHistory}) => {
                         </td>
                         <td className="paragraph2 py-3">
                             <div className={`amount-container ${history.type == 'charge' ? 'text-success' : 'text-danger'} paragraph2`}>
-                                {history.type == 'charge' ? '+' : '-'}{history.amount}
+                                {history.type == 'charge' ? '+' : '-'}{Number(history.amount).toLocaleString()}
                                 <div className="mobile-date paragraph2">{history.created_at}</div>
                             </div>
                         </td>

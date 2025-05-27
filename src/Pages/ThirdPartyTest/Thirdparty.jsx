@@ -4,6 +4,7 @@ import EmojiPicker from "emoji-picker-react";
 import axiosInstance from "../../hooks/axiosInstance";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuthContext";
+import Loader from "../../components/utilities/Loader/Loader";
 
 const pageLengths = [91, 182, 273, 364, 455, 546];
 
@@ -12,6 +13,7 @@ const Thirdparty = () => {
 
   const textareaRef = useRef(null);
   const [loading, setLoading] = useState(false);
+  const [testLoading, setTestLoading] = useState(false);
   const [showEmoji, setShowEmoji] = useState(false);
   const [smsCharge, setSmsCharge] = useState(16);
   const [testReport, setTestReport] = useState([])
@@ -94,6 +96,7 @@ const Thirdparty = () => {
   };
 
   const fetchThirdpartyTest = () => {
+    setTestLoading(true)
     axiosInstance
       .get(`/user/message/test_result/${userData?.userInfo.id}`)
       .then((res) => {
@@ -103,7 +106,7 @@ const Thirdparty = () => {
         console.log(err.response);
         toast.error(err.response.data.message);
       })
-      .finally(() => setLoading(false));
+      .finally(() => setTestLoading(false));
   };
 
   const sendMessage = async (e) => {
@@ -120,6 +123,11 @@ const Thirdparty = () => {
       const minuteString = today.toISOString().split("T")[1].slice(3, 5);
       const secondString = today.toISOString().split("T")[1].slice(6, 8);
 
+      const intervalDuration = 2000; // 2 seconds in milliseconds
+      const totalDuration = 30000;   // 1 minute in milliseconds
+
+      let intervalId; // To store the ID returned by setInterval
+
       formData.smsAmount = pageCount * smsCharge * formData.recipientCount;
       formData.sendDate = `${dateString} ${hourString}:${minuteString}:${secondString}`
 
@@ -128,10 +136,16 @@ const Thirdparty = () => {
         .then((res) => {
           toast.success(res.data.message);
           resetForm();
+          fetchThirdpartyTest()  
 
+          // Set up the interval to call the function every 3 seconds
+          intervalId = setInterval(fetchThirdpartyTest, intervalDuration);
+
+          // Set a timeout to clear the interval after 1 minute
           setTimeout(() => {
-            fetchThirdpartyTest()  
-          }, 8000);
+              clearInterval(intervalId); // Stop the interval
+              console.log("Interval stopped after 1 minute.");
+          }, totalDuration);
         })
         .catch((err) => {
           console.log(err.response);
@@ -280,6 +294,7 @@ const Thirdparty = () => {
             </tbody>
           </table>
         </div>
+        {/* {testLoading && <Loader />} */}
       </div>
 
       <div id="testModal" className="modal-overlay" style={{ display: "none" }}>

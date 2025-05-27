@@ -4,6 +4,7 @@ import axiosInstance from '../../hooks/axiosInstance'
 import { toast } from 'react-toastify'
 import useAuth from '../../hooks/useAuthContext'
 import CreditHistoryTable from '../../components/CreditHistoryTable'
+import Loader from '../../components/utilities/Loader/Loader'
 
 const CreditHistory = () => {
     const {userData} = useAuth()
@@ -76,6 +77,8 @@ const CreditHistory = () => {
                 <CreditHistoryTable creditHistory={creditHistory}/>
             </div>
         </div>
+
+        {loading && <Loader />}
     </div>
   )
 }

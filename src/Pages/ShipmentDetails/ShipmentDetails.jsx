@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuthContext";
 import { Pagination } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import Loader from "../../components/utilities/Loader/Loader";
 
 const ShipmentDetails = () => {
   const {userData} =  useAuth()
@@ -172,10 +173,10 @@ const ShipmentDetails = () => {
                                 <small className="paragraph mt-0">
                                   shipment status
                                 </small>
-                                <div className="d-flex flex-wrap w-100">
+                                <div className="d-flex flex-wrap gap-4 w-100">
                                   <div
                                     className="badge text-success py-2 px-2 d-flex flex-column align-items-start text-start"
-                                    style={{background: "#dcfce7", width: "25%"}}
+                                    style={{background: "#dcfce7", width: "75%"}}
                                   >
                                     <small>success</small>
                                     <p className="mb-0 mt-1">{singleSmsReport?.success_count}pcs</p>
@@ -183,13 +184,13 @@ const ShipmentDetails = () => {
 
                                   <div
                                     className="badge text-danger py-2 px-2 d-flex flex-column align-items-start text-start"
-                                    style={{background: "#fee2e2", width: "25%"}}
+                                    style={{background: "#fee2e2", width: "20%"}}
                                   >
                                     <small>failure</small>
                                     <p className="mb-0 mt-1">{singleSmsReport?.fail_count}pcs</p>
                                   </div>
 
-                                  <div
+                                  {/* <div
                                     className="badge text-warning py-2 px-2 d-flex flex-column align-items-start text-start"
                                     style={{background: "#fef3c7", width: "25%"}}
                                   >
@@ -203,7 +204,7 @@ const ShipmentDetails = () => {
                                   >
                                     <small>cancellation</small>
                                     <p className="mb-0 mt-1">0pcs</p>
-                                  </div>
+                                  </div> */}
                                 </div>
 
                                 <hr className="mt-2 mb-1" />
@@ -213,7 +214,7 @@ const ShipmentDetails = () => {
                                 </p>
                               </div>
 
-                              <div className="row mt-3 w-100 m-0 p-0 d-flex justify-content-end gap-2">
+                              {/* <div className="row mt-3 w-100 m-0 p-0 d-flex justify-content-end gap-2">
                                 <div className="col-12 col-md-auto mb-2 mb-md-0 p-0">
                                   <button className="btn btn-primary w-100 px-3">
                                     Export
@@ -227,7 +228,7 @@ const ShipmentDetails = () => {
                                     View Details
                                   </NavLink>
                                 </div>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </div>
@@ -255,6 +256,8 @@ const ShipmentDetails = () => {
             />
         </div>}
       </div>
+
+      {loading && <Loader />}
     </div>
   );
 };
