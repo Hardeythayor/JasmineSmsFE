@@ -254,7 +254,7 @@ const ShipmentDetails = () => {
               :
                 <tr>
                   <td colSpan={4}>
-                    <p className="text-center">No Record Found</p>
+                    <p className="text-center">{t("noRecord")}</p>
                   </td>
                 </tr>
             }
