@@ -1,30 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuthContext";
 import axiosInstance from "../../hooks/axiosInstance";
+import { useTranslation } from "react-i18next";
+import LanguageSelector from "../LanguageSelector";
 
 const Header = () => {
+  const {t} = useTranslation()
+
   const {userData, resetUser} = useAuth()
   const navigate = useNavigate()
 
-    const logout = () => {
-        const url = '/user/auth/logout'
-        const loginPath  = '/auth/login'
-        
+  const [smsCharge, setSmsCharge] = useState(16)
 
-        axiosInstance.post(url)
-            .then(res => {
+const logout = () => {
+    const url = '/user/auth/logout'
+    const loginPath  = '/auth/login'
+    
+
+    axiosInstance.post(url)
+        .then(res => {
+            localStorage.removeItem('userData')
+            resetUser()
+            navigate(loginPath)
+        })
+        .catch((err) => {
+            if (err.response.status == '401'){
                 localStorage.removeItem('userData')
-                resetUser()
                 navigate(loginPath)
-            })
-            .catch((err) => {
-                if (err.response.status == '401'){
-                    localStorage.removeItem('userData')
-                    navigate(loginPath)
-                }
-            })
-    }
+            }
+        })
+}
+
+const fetchSmsCharge = () => {
+  axiosInstance.get("/user/message/charge")
+    .then(res => {
+      setSmsCharge(res.data.data)
+    })
+    .catch(err => {
+      console.log(err.response);
+      toast.error(t("otherText.6"))
+    })
+}
+
+useEffect(() => {
+    fetchSmsCharge()
+  }, [])
 
   return (
     <>
@@ -61,23 +82,24 @@ const Header = () => {
                     aria-expanded="false"
                     id="casesDropdown"
                     >
-                    806 cases
+                    806{t("dashboard.dashboardText.7")}
                     </span>
 
                     <ul
-                    className="dropdown-menu p-3 w-50 shadow"
-                    aria-labelledby="notificationDropdown"
-                    style={{maxWidth: "350px", minWidth: "300px", right: 0, left: "auto"}}
+                        className="dropdown-menu p-3 w-50 shadow"
+                        aria-labelledby="notificationDropdown"
+                        style={{maxWidth: "350px", minWidth: "300px", right: 0, left: "auto"}}
                     >
-                    <li className="fw-bold mb-2">Message Unit Price Guide</li>
+                    <li className="fw-bold mb-2">{t("otherText.0")}</li>
                     <div className="d-flex justify-content-between">
                         <span>SMS</span>
-                        <span>16 credits</span>
+                        <span>{smsCharge}{t("otherText.1")}</span>
                     </div>
                     </ul>
                 </div>
 
-                <div className="dropdown d-inline-block me-3 shadow-sm">
+                {/* <LanguageSelector /> */}
+                {/* <div className="dropdown d-inline-block me-3 shadow-sm">
                     <span
                     className="paragraph2 dropdown"
                     role="button"
@@ -140,7 +162,7 @@ const Header = () => {
                         <div className="text-muted small">March 22, 2025 03:39</div>
                     </div>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="dropdown">
                     <div
@@ -159,7 +181,7 @@ const Header = () => {
                     >
                         <li className="px-2">
                             <NavLink className="dropdown-item" to="/settings">
-                                Profile Settings
+                                {t("otherText.2")}
                             </NavLink>
                         </li>
                         <li>
@@ -167,7 +189,7 @@ const Header = () => {
                         </li>
                         <li className="px-2">
                             <button className="dropdown-item" onClick={logout}>
-                                Logout
+                                {t("otherText.3")}
                             </button>
                         </li>
                     </ul>
@@ -181,28 +203,28 @@ const Header = () => {
             <div className="d-lg-none">
                 <div className="offcanvas offcanvas-start custom-offcanvas" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
                 <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="mobileSidebarLabel">Menu</h5>
+                    {/* <h5 className="offcanvas-title" id="mobileSidebarLabel">Menu</h5> */}
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body d-flex flex-column h-100">
                     <div>
-                        <h6 className="sidebar-heading mt-4 mb-1 sub-heading">Sending Management</h6>
+                        <h6 className="sidebar-heading mt-4 mb-1 sub-heading">{t("sideBarHeading.0")}</h6>
                         <ul className="nav flex-column mb-2">
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/" id="mobile-sidebar-send-text">Send text</NavLink></li>
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/test" id="mobile-sidebar-third-party-test">3rd party test</NavLink></li>
+                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/" id="mobile-sidebar-send-text">{t("thirdPartyTest.pageHeading")}</NavLink></li>
+                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/test" id="mobile-sidebar-third-party-test">{t("thirdPartyTest.pageHeading")}</NavLink></li>
                         </ul>
-                        <h6 className="sidebar-heading mt-4 mb-1 sub-heading">Manage history</h6>
+                        <h6 className="sidebar-heading mt-4 mb-1 sub-heading">{t("sideBarHeading.1")}</h6>
                         <ul className="nav flex-column mb-2">
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/dashboard">Dashboard</NavLink></li>
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/messages">Shipment details</NavLink></li>
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/credits">Credit History</NavLink></li>
+                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/dashboard">{t("dashboard.pageHeading")}</NavLink></li>
+                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/messages">{t("shipmentDetail.pageHeading")}</NavLink></li>
+                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/credits">{t("creditHistory.pageHeading")}</NavLink></li>
                         </ul>
                         <ul className="nav flex-column mb-2 mt-4">
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/settings">setting</NavLink></li>
+                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/settings">{t("settings.pageHeading")}</NavLink></li>
                         </ul>
                     </div>
                     <div className="mt-auto text-center mb-3">
-                    <a href="#" className="d-block">inquiry <span className="text-primary">@SeaSMS</span></a>
+                    <a href="#" className="d-block">{t("otherText.4")} <span className="text-primary">@SeaSMS</span></a>
                     </div>
                 </div>
                 </div>

@@ -1,0 +1,88 @@
+{
+    "noRecord": "No record found",
+    "sideBarHeading": ["Sending Management", "Manage history"],
+    "authForm": {
+        "labels": [
+            "id", "password", "Don't have an account?", "Sign up", "Log in", "Invitation Code", "name", 
+            "verify password","join the membership", "Already have an account?"
+        ],
+        "placeholderText": [
+            "Please enter your ID", "Please enter your password", "Please enter your invitation code", "English letters, numbers, and underscores (_) can be used.",
+            "Please enter your name"
+        ]
+    },
+    "messageText": [
+        "Emoticon", "Short URL", "Rewrite", "Please enter your message", "Start testing", "full initialization", 
+        "Write a message", "Please enter the message you want to send"
+    ],
+    "otherText": [
+        "Message Unit Price Guide", "credits", "Profile Settings", "Logout", "inquiry", "Message sent successfully", "An error occured. Please, try again",
+        "Login Successful", "Registration Successful", "Invalid Numbers"
+    ],
+    "homePage": {
+        "pageHeading": "Send text",
+        "pageSubHeading": "You can compose and send SMS messages",
+        "recipientField": [
+            "Enter recipient number", "Please enter your phone number. Multiple numbers are separated by commas (,) or line breaks.", "Fixed number",
+            "array", "Remove duplicates", "paste", "Hyphens (-) and special characters are automatically removed", "All formats +8210, 8210, 010, 10 are supported",
+            "Duplicate numbers are allowed (use the remove duplicate button if necessary)", "Numbers with incorrect format are excluded", "Send"
+        ],
+        "recipientTotal": "Total: {{count}}",
+        "recentShipmentField": ["Recent Shipments", "Here is the last 10 Shipment", "There is no recent shipment"],
+        "sendingSettingsField": [
+            "Sending Settings", "Shipped immediately", "Reservation Send", "Split sending settings", "Split the message and send it sequentially", 
+            "Not in use", "Use", "each"
+        ]
+    },
+    "settings": {
+        "pageHeading": "setting",
+        "pageSubHeading": "Manage your account settings",
+        "formHeading": "Change Password",
+        "formSubHeading": "You can change your account password",
+        "oldPasswordLabel": "Current password",
+        "passwordLabel": "New Password",
+        "confirmPasswordLabel": "Confirm new password",
+        "submitButton": "Change Password"
+    },
+    "creditHistory": {
+        "pageHeading": "Credit History",
+        "filterOne": "Entire",
+        "filterTwo": "Charge/Refund",
+        "filterThree": "Deduction",
+        "tHOne": "Date",
+        "tHTwo": "Division",
+        "thThree": "Amount",
+        "thFour": "Detail",
+        "badgeOne": "Deduction",
+        "badgeTwo": "Charge",
+        "msgPurposeOne_one": "Send message ({{count}})",
+        "msgPurposeOne_other": "Send message ({{count}}items)",
+        "msgPurposeTwo": "3rd party test sent"
+    },
+    "shipmentDetail": {
+        "pageHeading": "Shipment details",
+        "filterPlaceholder": "Search by content",
+        "tHOne": "Time of dispatch",
+        "tHTwo": "Category",
+        "thThree": "Detail",
+        "thFour": "Recipient",
+        "badgeOne": "immediately",
+        "badgeTwo": "scheduled",
+        "msgRecipient_one": "{{count}} person",
+        "msgRecipient_other": "{{count}} people",
+        "detailsText": ["situation", "complete", "incomplete", "Message Content", "Shipping Information", "Shipment Type", 
+        "Number of recipients", "Shipment status", "success", "failure", "shipping time", "send"],
+        "statusCount_one": "{{count}} piece",
+        "statusCount_other": "{{count}} pcs"
+    },
+    "dashboard": {
+        "pageHeading": "Dashboard",
+        "dashboardText": ["Total Sent SMS", "Remaining credits", "SMS sent to total recipients", "Available Credits", 
+        "Recent credit transaction history", "SMS sent in the last 14 days", "Number of Shipments", "Cases"]
+    },
+    "thirdPartyTest": {
+        "pageHeading": "3rd party test",
+        "pageSubHeading": "You can check whether the message is sent normally by testing it before sending it",
+        "tableText": ["Recent test results", "hour", "detail"]
+    }
+}

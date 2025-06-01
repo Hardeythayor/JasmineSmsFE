@@ -5,10 +5,14 @@ import axiosInstance from "../../hooks/axiosInstance";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuthContext";
 import Loader from "../../components/utilities/Loader/Loader";
+import { useTranslation } from "react-i18next";
 
 const pageLengths = [91, 182, 273, 364, 455, 546];
 
 const Thirdparty = () => {
+  const {t} = useTranslation()
+  const {pageHeading, pageSubHeading, tableText} = t("thirdPartyTest")
+
   const {userData} = useAuth()
 
   const textareaRef = useRef(null);
@@ -163,10 +167,9 @@ const Thirdparty = () => {
   return (
     <div className="mx-0">
       <div className="content-header-wrapper">
-        <h3 className="mb-0 content-header">3rd party test</h3>
+        <h3 className="mb-0 content-header mt-5">{pageHeading}</h3>
         <p className="content-subheading">
-          You can check whether the message is sent normally by testing it
-          before sending it.
+          {pageSubHeading}.
         </p>
       </div>
 
@@ -184,7 +187,7 @@ const Thirdparty = () => {
                   className="mdi mdi-emoticon-happy-outline me-lg-2"
                   aria-hidden="true"
                 ></i>
-                <span className="d-none d-sm-inline">Emoticon</span>
+                <span className="d-none d-sm-inline">{t("messageText.0")}</span>
               </button>
 
               <a
@@ -193,7 +196,7 @@ const Thirdparty = () => {
                 className="btn align-items-center d-flex btn-outline-secondary btn-sm text-black fw-semibold text-decoration-none h-9 px-3"
               >
                 <i className="fas fa-up-right-from-square me-lg-2"></i>
-                <span className="d-none d-sm-inline ms-1">Short URL</span>
+                <span className="d-none d-sm-inline ms-1">{t("messageText.1")}</span>
               </a>
 
               <span
@@ -210,7 +213,7 @@ const Thirdparty = () => {
                 onClick={handleRewrite}
               >
                 <i className="mdi mdi-refresh me-lg-2" aria-hidden="true"></i>
-                <span className="d-none d-sm-inline ms-1">Rewrite</span>
+                <span className="d-none d-sm-inline ms-1">{t("messageText.2")}</span>
               </button>
             </div>
 
@@ -218,7 +221,7 @@ const Thirdparty = () => {
               id="messageTextarea"
               className="form-control mb-2 paragraph4"
               rows="8"
-              placeholder="Please enter your message"
+              placeholder={t("messageText.3")}
               ref={textareaRef}
               value={formData.content}
               name="content"
@@ -239,7 +242,7 @@ const Thirdparty = () => {
               {loading ? (
                 <div class="spinner-border spinner-border-sm text-light"></div>
               ) : (
-                "Start testing"
+                t("messageText.4")
               )}
             </button>
           </div>
@@ -255,7 +258,7 @@ const Thirdparty = () => {
             color: "rgb(10, 10, 10)",
           }}
         >
-          Recent test results
+          {tableText[0]}
         </h5>
         <div
           className="table-responsive p-4 me-3 shadow-sm"
@@ -264,8 +267,8 @@ const Thirdparty = () => {
           <table className="table table-bordered">
             <thead>
               <tr>
-                <th className="text-muted fw-normal" width="27%">hour</th>
-                <th className="text-muted fw-normal" width="40%">detail</th>
+                <th className="text-muted fw-normal" width="27%">{tableText[1]}</th>
+                <th className="text-muted fw-normal" width="40%">{tableText[2]}</th>
                 <th className="text-muted fw-normal text-center">SKT</th>
                 <th className="text-muted fw-normal text-center">KT</th>
                 <th className="text-muted fw-normal text-center">LGU+</th>
@@ -297,7 +300,7 @@ const Thirdparty = () => {
         {/* {testLoading && <Loader />} */}
       </div>
 
-      <div id="testModal" className="modal-overlay" style={{ display: "none" }}>
+      {/* <div id="testModal" className="modal-overlay" style={{ display: "none" }}>
         <div className="modal-box">
           <span className="close-btn" onclick="closeModal()">
             &times;
@@ -314,7 +317,7 @@ const Thirdparty = () => {
             <button className="check-btn btn-text2">check</button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

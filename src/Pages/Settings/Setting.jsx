@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import "./Setting.css";
 import { toast } from "react-toastify";
 import axiosInstance from "../../hooks/axiosInstance";
+import { useTranslation } from "react-i18next";
 
 const Setting = () => {
+  const {t} = useTranslation()
+  const {
+    pageHeading, pageSubHeading, oldPasswordLabel,passwordLabel, 
+    formHeading, formSubHeading, confirmPasswordLabel, submitButton
+  } = t("settings")
+
   const [loading, setLoading] = useState(false)
   const [validationError, setValidationError] = useState({})
   const [formData, setFormData] = useState({
@@ -42,7 +49,7 @@ const Setting = () => {
             resetFormData()
         })
         .catch(err => {
-            toast.error("An error occured. Please, try again")
+            toast.error(t("otherText.6"))
             if(err.response.status == 422) {
                 setValidationError(err.response.data.errors)
             }
@@ -53,8 +60,8 @@ const Setting = () => {
   return (
     <div className="mx-0">
         <div className="content-header-wrapper">
-            <h3 className="mb-0 content-header">setting</h3>
-            <p className="content-subheading">Manage your account settings</p>
+            <h3 className="mb-0 content-header">{pageHeading}</h3>
+            <p className="content-subheading">{pageSubHeading}</p>
         </div>
 
       <div className="card shadow-sms">
@@ -63,14 +70,14 @@ const Setting = () => {
             className="card-title fw-bold"
             style={{fontSize: "24px", fontWeight: 600, lineHeight: "24px", color: "rgb(10, 10, 10)"}}
           >
-            Change Password
+            {formHeading}
           </h5>
-          <p className="paragraph">You can change your account password</p>
+          <p className="paragraph">{formSubHeading}</p>
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label paragraph2">
-                Current password
+                {oldPasswordLabel}
               </label>
               <div className="input">
                 <input
@@ -87,7 +94,7 @@ const Setting = () => {
 
             <div className="mb-3">
               <label className="form-label paragraph2">
-                New Password
+                {passwordLabel}
               </label>
               <div className="input-group">
                 <input
@@ -104,7 +111,7 @@ const Setting = () => {
 
             <div className="mb-3">
               <label className="form-label paragraph2">
-                Confirm new password
+                {confirmPasswordLabel}
               </label>
               <div className="input-group">
                 <input
@@ -118,7 +125,7 @@ const Setting = () => {
               </div>
             </div>
             <button type="submit" className="btn btn-dark custom-btn btn-lg" disabled={loading}>
-              {loading ? <div class="spinner-border spinner-border-sm text-light"></div> : 'Change Password'}
+              {loading ? <div class="spinner-border spinner-border-sm text-light"></div> : submitButton}
             </button>
           </form>
         </div>

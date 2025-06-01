@@ -3,8 +3,12 @@ import "./Auth.css"
 import { NavLink, useNavigate } from 'react-router-dom'
 import axiosInstance from '../../hooks/axiosInstance'
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 const Register = () => {
+  const {t} = useTranslation()
+  const {labels, placeholderText} = t("authForm")
+
     const navigate = useNavigate()
 
     const [registerLoading, setRegisterLoading] = useState(false)
@@ -45,12 +49,12 @@ const Register = () => {
         setValidationError({})
         axiosInstance.post('/user/auth/register', formData)
             .then(res => {
-                toast.success("Account Created Succesfully")
+                toast.success(t("otherText.8"))
                 resetFormData()
                 navigate("/auth/login")
             })
             .catch(err => {
-                toast.error("An error occured. Please, try again")
+                toast.error(t("otherText.6"))
                 if(err.response.status == 422) {
                     setValidationError(err.response.data.errors)
                 }
@@ -67,11 +71,11 @@ const Register = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label>Invitation Code</label>
+            <label>{labels[5]}</label>
             <input 
                 type="text" 
                 className="form-control" 
-                placeholder="Please enter your invitation code" 
+                placeholder={placeholderText[2]}
                 name='inviteCode'
                 value={formData.inviteCode}
                 onChange={handleChange}
@@ -80,11 +84,11 @@ const Register = () => {
           </div>
 
           <div className="mb-3">
-            <label>id</label>
+            <label>{labels[0]}</label>
             <input 
                 type="text" 
                 className="form-control" 
-                placeholder="English letters, numbers, and underscores (_) can be used." 
+                placeholder={placeholderText[3]}
                 name='userId'
                 value={formData.userId}
                 onChange={handleChange}
@@ -93,11 +97,11 @@ const Register = () => {
           </div>
 
           <div className="mb-3">
-            <label>name</label>
+            <label>{labels[6]}</label>
             <input 
                 type="text" 
                 className="form-control" 
-                placeholder="Please enter your name" 
+                placeholder={placeholderText[4]} 
                 name='name'
                 value={formData.name}
                 onChange={handleChange}
@@ -106,7 +110,7 @@ const Register = () => {
           </div>
 
           <div className="mb-4">
-            <label>password</label>
+            <label>{labels[1]}</label>
             <input 
                 type="password" 
                 className="form-control"
@@ -118,7 +122,7 @@ const Register = () => {
           </div>
 
           <div className="mb-4">
-            <label>verify password</label>
+            <label>{labels[7]}</label>
             <input 
                 type="password" 
                 className="form-control" 
@@ -129,16 +133,16 @@ const Register = () => {
           </div>
 
           <button type="submit" className="btn btn-dark w-100" disabled={registerLoading}>
-            {registerLoading ? <div class="spinner-border spinner-border-sm text-light"></div> : 'join the membership'}
+            {registerLoading ? <div class="spinner-border spinner-border-sm text-light"></div> : labels[8]}
           </button>
         </form>
 
         <div className="footer">
-          Already have an account? <NavLink to="/auth/login">Log in</NavLink>
+          {labels[9]} <NavLink to="/auth/login">{labels[4]}</NavLink>
         </div>
 
         <div className="telegram">
-          inquiry <b>@SeaSMS</b>
+          {t("otherText.4")} <b>@SeaSMS</b>
         </div>
       </div>
     </div>

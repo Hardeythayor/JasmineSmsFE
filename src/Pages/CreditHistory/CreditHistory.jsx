@@ -5,8 +5,17 @@ import { toast } from 'react-toastify'
 import useAuth from '../../hooks/useAuthContext'
 import CreditHistoryTable from '../../components/CreditHistoryTable'
 import Loader from '../../components/utilities/Loader/Loader'
+import { useTranslation } from 'react-i18next'
 
 const CreditHistory = () => {
+    const {t} = useTranslation()
+    const {
+        pageHeading,
+        filterOne,
+        filterTwo,
+        filterThree
+    } = t("creditHistory")
+
     const {userData} = useAuth()
 
     const [loading, setLoading] = useState(false)
@@ -41,7 +50,7 @@ const CreditHistory = () => {
   return (
     <div className="mx-0">
         <div className="content-header-wrapper">
-            <h3 className="mb-0 content-header">Credit History</h3>
+            <h3 className="mb-0 content-header mt-5">{pageHeading}</h3>
         </div>
         <div className="tab-wrapper mb-3 justify-content-between col-xl-5">
             <ul className="nav nav-pills d-flex w-100" id="creditTab" role="tablist">
@@ -49,17 +58,17 @@ const CreditHistory = () => {
                 <button className="nav-link active w-100" id="entire-tab" 
                     data-bs-toggle="tab" data-bs-target="#entire" type="button" role="tab"
                     onClick={() => handleFilterChange('')}
-                >Entire</button>
+                >{filterOne}</button>
             </li>
             <li className="nav-item flex-fill text-center" role="presentation">
                 <button className="nav-link w-100" id="charge-tab" data-bs-toggle="tab"
                  data-bs-target="#charge" type="button" role="tab" onClick={() => handleFilterChange('charge')}
-                >Charge/Refund</button>
+                >{filterTwo}</button>
             </li>
             <li className="nav-item flex-fill text-center" role="presentation">
                 <button className="nav-link w-100" id="deduction-tab" data-bs-toggle="tab" 
                 data-bs-target="#deduction" type="button" role="tab" onClick={() => handleFilterChange('deduction')}
-            >Deduction</button>
+            >{filterThree}</button>
             </li>
             </ul>
         </div>

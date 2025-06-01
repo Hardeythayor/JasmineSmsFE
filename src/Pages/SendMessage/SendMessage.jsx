@@ -4,6 +4,7 @@ import "./SendMessage.css";
 import shuffleArray from "../../hooks/useArrayShuffle";
 import { toast } from "react-toastify";
 import axiosInstance from "../../hooks/axiosInstance";
+import { useTranslation } from "react-i18next";
 
 const hours = shuffleArray.generateNumbersWithLeadingZeros(24);
 const minutes = shuffleArray.generateNumbersWithLeadingZeros(60);
@@ -15,6 +16,11 @@ const hourString = today.toISOString().split('T')[1].slice(0,2)
 const minuteString = today.toISOString().split('T')[1].slice(3,5)
 
 const SendMessage = () => {
+  const {t} = useTranslation()
+  const {
+    pageHeading, pageSubHeading, recipientField, recentShipmentField, sendingSettingsField
+  } = t("homePage")
+
   const textareaRef = useRef(null);
   const dateFieldRef = useRef(null);
 
@@ -182,7 +188,7 @@ const SendMessage = () => {
         
     }
     if(validList.length == 0) {
-        toast.error('Invalid Numbers')
+        toast.error(t("otherText.9"))
         return
     }
     return validList
@@ -217,7 +223,7 @@ const SendMessage = () => {
     setInput(prev => (prev ? `${prev}\n${clipboardText}` : clipboardText));
   } catch (err) {
     console.error('Failed to read clipboard: ', err);
-    toast.error('Unable to access clipboard');
+    // toast.error('Unable to access clipboard');
   }
 };
 
@@ -236,9 +242,15 @@ const caclulateSmsPages = async() => {
     return pageLengths.indexOf(length) + 1;
 }
 
-// TO DO: fetch sms charge fro backend and replace with smsCharge variable
 const fetchSmsCharge = () => {
-
+  axiosInstance.get("/user/message/charge")
+    .then(res => {
+      setSmsCharge(res.data.data)
+    })
+    .catch(err => {
+      console.log(err.response);
+      toast.error(t("otherText.6"))
+    })
 }
 
  const sendMessage = async(e) => {
@@ -255,16 +267,20 @@ const fetchSmsCharge = () => {
     
         axiosInstance.post('/user/message/send', formData)
                     .then(res => {
-                        toast.success(res.data.message)
+                        toast.success(t("otherText.5"))
                         resetForm()
                     })
                     .catch(err => {
                         console.log(err.response);
-                        toast.error(err.response.data.message)
+                        toast.error(t("otherText.6"))
                     })
                     .finally(() => setLoading(false))
     }
  }
+
+  useEffect(() => {
+    fetchSmsCharge()
+  }, [])
 
   useEffect(() => {
     getCombinedDateTime();
@@ -274,14 +290,13 @@ const fetchSmsCharge = () => {
     <div className="mx-0 col-12 col-xl-11">
       <div className="content-header-wrapper d-flex justify-content-between align-items-center">
         <div>
-          <h3 className="mb-0 content-header mt-5">Send text</h3>
+          <h3 className="mb-0 content-header mt-5">{pageHeading}</h3>
           <p className="content-subheading">
-            You can compose and send SMS messages
+            {pageSubHeading}
           </p>
         </div>
         <button className="btn btn-outline-secondary text-black fw-semibold" onClick={handleFullInitialization}>
-          <i className="fa fa-refresh me-1 p-2" aria-hidden="true"></i> Full
-          Initialization
+          <i className="fa fa-refresh me-1 p-2" aria-hidden="true"></i> {t("messageText.5")}
         </button>
       </div>
 
@@ -289,9 +304,9 @@ const fetchSmsCharge = () => {
         <div className="col-12 col-xl-8 d-flex flex-column gap-5">
           <div className="card shadow-sms position-relative">
             <div className="card-body p-4">
-              <h5 className="card-title sub-heading ms-0">Write a message</h5>
+              <h5 className="card-title sub-heading ms-0">{t("messageText.6")}</h5>
               <p className="paragraph">
-                Please enter the message you want to send
+                {t("messageText.7")}
               </p>
               <div className="position-relative">
                 <div className="mb-3 d-flex gap-2 flex-nowrap overflow-auto align-items-center">
@@ -305,7 +320,7 @@ const fetchSmsCharge = () => {
                       className="mdi mdi-emoticon-happy-outline me-lg-2"
                       aria-hidden="true"
                     ></i>
-                    <span className="d-none d-sm-inline">Emoticon</span>
+                    <span className="d-none d-sm-inline">{t("messageText.0")}</span>
                   </button>
 
                   <a
@@ -314,7 +329,7 @@ const fetchSmsCharge = () => {
                     className="btn align-items-center d-flex btn-outline-secondary btn-sm text-black fw-semibold text-decoration-none h-9 px-3"
                   >
                     <i className="fas fa-up-right-from-square me-lg-2"></i>
-                    <span className="d-none d-sm-inline ms-1">Short URL</span>
+                    <span className="d-none d-sm-inline ms-1">{t("messageText.1")}</span>
                   </a>
 
                   <span className={`ms-auto small paragraph flex-shrink-0 ${formData?.content?.length > 90 ? 'text-yellow' : ''}`}>
@@ -330,7 +345,7 @@ const fetchSmsCharge = () => {
                       className="mdi mdi-refresh me-lg-2"
                       aria-hidden="true"
                     ></i>
-                    <span className="d-none d-sm-inline ms-1">Rewrite</span>
+                    <span className="d-none d-sm-inline ms-1">{t("messageText.2")}</span>
                   </button>
                 </div>
 
@@ -338,7 +353,7 @@ const fetchSmsCharge = () => {
                   id="messageTextarea"
                   className="form-control mb-2 paragraph4"
                   rows="11"
-                  placeholder="Please enter your message"
+                  placeholder={t("messageText.3")}
                   ref={textareaRef}
                   value={formData.content}
                   name="content"
@@ -352,7 +367,7 @@ const fetchSmsCharge = () => {
           </div>
           <div className="card">
             <div className="card-body gap-3 p-4 align-items-center shadow-sm">
-              <h5 className="fw-semibold sub-heading ms-0">Sending Settings</h5>
+              <h5 className="fw-semibold sub-heading ms-0">{sendingSettingsField[0]}</h5>
 
               <div
                 className="mt-4 mb-3 d-flex flex-column flex-sm-row gap-3 tab-section"
@@ -369,7 +384,7 @@ const fetchSmsCharge = () => {
                   aria-selected="true"
                   onClick={() => setSendMode('immediately')}
                 >
-                  Shipped immediately
+                  {sendingSettingsField[1]}
                 </button>
 
                 <button
@@ -383,7 +398,7 @@ const fetchSmsCharge = () => {
                   aria-selected="false"
                   onClick={() => setSendMode('reserved')}
                 >
-                  Reservation Send
+                  {sendingSettingsField[2]}
                 </button>
               </div>
 
@@ -464,9 +479,9 @@ const fetchSmsCharge = () => {
                 </div>
                 <div className="d-flex align-items-center p-0 m-0 justify-content-between">
                   <div>
-                    <p className="paragraph5 mb-1">Split sending settings</p>
+                    <p className="paragraph5 mb-1">{sendingSettingsField[3]}</p>
                     <p className="paragraph">
-                      Split the message and send it sequentially
+                      {sendingSettingsField[4]}
                     </p>
                   </div>
                   <div className="form-check form-switch">
@@ -484,7 +499,7 @@ const fetchSmsCharge = () => {
                       for="reserveSplitSendSwitch"
                     >
                       <small>
-                        {formData.splitSend == "yes" ? "Use" : "Not in use"}
+                        {formData.splitSend == "yes" ? sendingSettingsField[6] : sendingSettingsField[5]}
                       </small>
                     </label>
                   </div>
@@ -497,11 +512,11 @@ const fetchSmsCharge = () => {
                             value={formData.splitNumber}
                             onChange={handleChange}
                         >
-                            <option value="1">1 each</option>
-                            <option value="5">5 each</option>
-                            <option value="10">10 each</option>
-                            <option value="20">20 each</option>
-                            <option value="50">50 each</option>
+                            <option value="1">1{sendingSettingsField[7]}</option>
+                            <option value="5">5{sendingSettingsField[7]}</option>
+                            <option value="10">10{sendingSettingsField[7]}</option>
+                            <option value="20">20{sendingSettingsField[7]}</option>
+                            <option value="50">50{sendingSettingsField[7]}</option>
                         </select>
                     </div>
                 )}
@@ -510,12 +525,12 @@ const fetchSmsCharge = () => {
           </div>
           <div className="card shadow-sm">
             <div className="card-body p-4">
-              <span className="sub-heading ms-0">Recent Shipments</span>
+              <span className="sub-heading ms-0">{recentShipmentField[0]}</span>
               <p className="text-muted paragraph">
-                Here is the last 10 Shipment
+                {recentShipmentField[1]}
               </p>
               <p className="text-center paragraph">
-                There is no recent shipment
+                {recentShipmentField[2]}
               </p>
             </div>
           </div>
@@ -525,14 +540,13 @@ const fetchSmsCharge = () => {
             <div className="card-body p-4 shadow-sm">
               <div className="d-flex justify-content-between align-items-center">
                 <h5 className="card-title sub-heading ms-0">
-                  Enter recipient number
+                  {recipientField[0]}
                 </h5>
-                <span className="badge rounded-pill text-black">Total: {numbers.length}</span>
+                <span className="badge rounded-pill text-black">{t("homePage.recipientTotal", {count: numbers.length})}</span>
               </div>
 
               <div className="mb-3 paragraph">
-                Please enter your phone number. Multiple numbers are separated
-                by commas (,) or line breaks.
+                {recipientField[1]}
               </div>
               <div className="mb-2">
                 <div className="form-check form-switch ms-2 mt-2">
@@ -545,7 +559,7 @@ const fetchSmsCharge = () => {
                     className="form-check-label ms-2 paragraph2"
                     for="fixedNumberSwitch"
                   >
-                    Fixed number
+                    {recipientField[2]}
                   </label>
                 </div>
               </div>
@@ -557,7 +571,7 @@ const fetchSmsCharge = () => {
                     onClick={handleSort}
                   >
                     <i className="mdi mdi-sort-descending me-2"></i>
-                    array
+                    {recipientField[3]}
                   </button>
                   <button
                     className="btn btn-outline-secondary btn-sm flex-fill paragraph2 text-black fw-semibold"
@@ -565,7 +579,7 @@ const fetchSmsCharge = () => {
                     onClick={handleDeduplicate}
                   >
                     <i className="mdi mdi-filter-outline me-2"></i>
-                    Remove duplicates
+                    {recipientField[4]}
                   </button>
                   <button
                     className="btn btn-sm flex-fill paragraph2 paste-color btn-light text-black fw-semibold"
@@ -573,7 +587,7 @@ const fetchSmsCharge = () => {
                     onClick={handlePasteFromClipboard}
                   >
                     <i className="mdi mdi-content-paste me-2"></i>
-                    Paste
+                    {recipientField[5]}
                   </button>
                 </div>
               </div>
@@ -587,14 +601,13 @@ const fetchSmsCharge = () => {
               />
               <ul className="ps-3 mb-0 paragraph">
                 <li>
-                  Hyphens (-) and special characters are automatically removed
+                  {recipientField[6]}
                 </li>
-                <li>All formats +8210, 8210, 010, 10 are supported</li>
+                <li>{recipientField[7]}</li>
                 <li>
-                  Duplicate numbers are allowed (use the remove duplicate button
-                  if necessary)
+                  {recipientField[8]}
                 </li>
-                <li>Numbers with incorrect format are excluded</li>
+                <li>{recipientField[9]}</li>
               </ul>
               <hr />
               <button
@@ -603,7 +616,7 @@ const fetchSmsCharge = () => {
                 onClick={sendMessage}
                 disabled={loading}
               >
-                {loading ? <div class="spinner-border spinner-border-sm text-light"></div> : 'Send'}
+                {loading ? <div class="spinner-border spinner-border-sm text-light"></div> : recipientField[10]}
               </button>
             </div>
           </div>

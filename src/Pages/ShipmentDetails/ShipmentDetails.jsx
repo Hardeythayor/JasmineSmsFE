@@ -6,8 +6,23 @@ import useAuth from "../../hooks/useAuthContext";
 import { Pagination } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Loader from "../../components/utilities/Loader/Loader";
+import { useTranslation } from "react-i18next";
 
 const ShipmentDetails = () => {
+  const {t} = useTranslation();
+
+   const {
+        pageHeading,
+        filterPlaceholder,
+        tHOne,
+        tHTwo,
+        thThree,
+        thFour,
+        badgeOne,
+        badgeTwo,
+        detailsText
+  } = t("shipmentDetail")
+
   const {userData} =  useAuth()
 
   const [loading, setLoading] = useState(false)
@@ -75,14 +90,14 @@ const ShipmentDetails = () => {
   return (
     <div className="mx-0">
       <div className="content-header-wrapper">
-        <h3 className="mb-0 content-header">Shipment Details</h3>
+        <h3 className="mb-0 content-header mt-5">{pageHeading}</h3>
       </div>
 
       <div className="search-container col-xl-4 mb-4">
         <input
           type="text"
           className="form-control"
-          placeholder="🔍 Search by content"
+          placeholder={`🔍 ${filterPlaceholder}`}
           name="search"
           value={filter.search}
           onChange={handleFilterChange}
@@ -94,12 +109,12 @@ const ShipmentDetails = () => {
           <thead>
             <tr>
               <th className="text-muted ship-paragraph text-start d-none d-md-table-cell" width="15%">
-                Time of dispatch
+                {tHOne}
               </th>
-              <th className="text-muted ship-paragraph text-start" width="12%">Category</th>
-              <th className="text-muted ship-paragraph text-start">Detail</th>
+              <th className="text-muted ship-paragraph text-start" width="12%">{tHTwo}</th>
+              <th className="text-muted ship-paragraph text-start">{thThree}</th>
               <th className="text-muted ship-paragraph text-end d-none d-md-table-cell">
-                Recipient
+                {thFour}
               </th>
             </tr>
           </thead>
@@ -115,7 +130,7 @@ const ShipmentDetails = () => {
                         <span
                           className="badge rounded-pill bg-success-light px-3 py-2 text-success"
                         >
-                          {report.send_type}
+                          {report.send_type == 'immediately' ? badgeOne : badgeTwo}
                         </span>
                       </td>
                       <td className="clickable-cell ship-paragraph2 text-start">
@@ -125,13 +140,13 @@ const ShipmentDetails = () => {
                             {report.created_at}
                           </small>
                           <small className="text-muted d-block paragraph">
-                            {`${report.recipient_count} ${report.recipient_count > 1 ? 'people' : 'person'}`}
+                            {t('shipmentDetail.msgRecipient', {count: report.recipient_count})}
                           </small>
                         </div>
                       </td>
 
                       <td className="clickable-cell ship-paragraph2 text-end d-none d-md-table-cell">
-                        {`${report.recipient_count} ${report.recipient_count > 1 ? 'people' : 'person'}`}
+                        {t('shipmentDetail.msgRecipient', {count: report.recipient_count})}
                       </td>
                     </tr>
 
@@ -139,14 +154,14 @@ const ShipmentDetails = () => {
                       <td colSpan="4">
                         <div className="card shadow-sm expanded-content no-border-card">
                           <div className="card-body">
-                            <h5 className="sub-heading mb-0 paragraph  ms-0">situation</h5>
+                            <h5 className="sub-heading mb-0 paragraph  ms-0">{detailsText[0]}</h5>
                             <div className="row g-4">
                               <div className="col-12 col-md-6">
                                 <p
                                   className="mb-3 badge text-success bg-success-light rounded-pill paragraph">
-                                  {report.status == 'success' ? 'complete' : 'incomplete'}
+                                  {report.status == 'success' ? detailsText[1] : detailsText[2]}
                                 </p>
-                                <p className="mb-2 paragraph">Message content</p>
+                                <p className="mb-2 paragraph">{detailsText[3]}</p>
                                 <div className="bg-light mb-2 p-2 rounded-lg">
                                   <p className="paragraph2 m-0">{report.content}</p>
                                 </div>
@@ -158,36 +173,36 @@ const ShipmentDetails = () => {
                                     className="mdi mdi-newspaper-variant-outline text-muted"
                                     aria-hidden="true"
                                   ></i>{" "}
-                                  Shipping Information
+                                  {detailsText[4]}
                                 </p>
                                 <p className="mb-2 d-flex justify-content-between paragraph">
-                                  Shipment Type:{" "}
-                                  <b className="mb-0 paragraph2">{report.send_type == 'immediately' ? 'Send immediately' : 'Reserved'}</b>
+                                  {detailsText[5]}:{" "}
+                                  <b className="mb-0 paragraph2">{report.send_type == 'immediately' ? `${detailsText[11]} ${badgeOne}` : badgeTwo}</b>
                                 </p>
                                 <p className="mb-2 d-flex justify-content-between paragraph">
-                                  Number of recipients:{" "}
-                                  <b className="mb-0 paragraph2">{`${report.recipient_count} ${report.recipient_count > 1 ? 'people' : 'person'}`}</b>
+                                  {detailsText[6]}:{" "}
+                                  <b className="mb-0 paragraph2">{t('shipmentDetail.msgRecipient', {count: report.recipient_count})}</b>
                                 </p>
 
                                 <hr className="mb-0" />
                                 <small className="paragraph mt-0">
-                                  shipment status
+                                  {detailsText[7]}
                                 </small>
                                 <div className="d-flex flex-wrap gap-4 w-100">
                                   <div
                                     className="badge text-success py-2 px-2 d-flex flex-column align-items-start text-start"
                                     style={{background: "#dcfce7", width: "75%"}}
                                   >
-                                    <small>success</small>
-                                    <p className="mb-0 mt-1">{singleSmsReport?.success_count}pcs</p>
+                                    <small>{detailsText[8]}</small>
+                                    <p className="mb-0 mt-1">{t('shipmentDetail.statusCount', {count: singleSmsReport?.success_count})}</p>
                                   </div>
 
                                   <div
                                     className="badge text-danger py-2 px-2 d-flex flex-column align-items-start text-start"
                                     style={{background: "#fee2e2", width: "20%"}}
                                   >
-                                    <small>failure</small>
-                                    <p className="mb-0 mt-1">{singleSmsReport?.fail_count}pcs</p>
+                                    <small>{detailsText[9]}</small>
+                                    <p className="mb-0 mt-1">{t('shipmentDetail.statusCount', {count: singleSmsReport?.fail_count})}</p>
                                   </div>
 
                                   {/* <div
@@ -209,7 +224,7 @@ const ShipmentDetails = () => {
 
                                 <hr className="mt-2 mb-1" />
                                 <p className="d-flex justify-content-between paragraph mb-0">
-                                  Shipment Time:{" "}
+                                  {detailsText[10]}:{" "}
                                   <b className="mb-0 paragraph2">{report.created_at}</b>
                                 </p>
                               </div>

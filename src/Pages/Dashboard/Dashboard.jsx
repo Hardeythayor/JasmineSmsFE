@@ -14,6 +14,7 @@ import axiosInstance from "../../hooks/axiosInstance";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuthContext";
 import Loader from "../../components/utilities/Loader/Loader";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(
   CategoryScale,
@@ -25,6 +26,9 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
+  const {t} = useTranslation()
+  const {pageHeading, dashboardText} = t("dashboard")
+
   const {userData} = useAuth()
 
   const [analyticsLoading, setAnalyticsLoading] = useState(false)
@@ -98,7 +102,7 @@ const Dashboard = () => {
     labels: chartData?.days,
     datasets: [
       {
-        label: 'Number of Shipments',
+        label: dashboardText[6],
         data: chartData?.sms_count,
         // data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
         backgroundColor: 'rgb(59, 130, 246)',
@@ -109,7 +113,7 @@ const Dashboard = () => {
   return (
     <div className="mx-0">
       <div className="content-header-wrapper">
-        <h3 className="mb-0 content-header mt-5">Dashboard</h3>
+        <h3 className="mb-0 content-header mt-5">{pageHeading}</h3>
       </div>
 
       <div className="row g-4 mb-4">
@@ -117,9 +121,9 @@ const Dashboard = () => {
           <div className="card h-100 shadow-sms">
             <div className="card-body d-flex align-items-center justify-content-between">
               <div>
-                <div className="mb-2 fw-semibold">Total Sent SMS</div>
-                <div className="fw-bold fs-4">{Number(analyticsData?.total_sms).toLocaleString()} Cases</div>
-                <div className="text-muted small">SMS sent to total recipients</div>
+                <div className="mb-2 fw-semibold">{dashboardText[0]}</div>
+                <div className="fw-bold fs-4">{Number(analyticsData?.total_sms).toLocaleString()} {dashboardText[7]}</div>
+                <div className="text-muted small">{dashboardText[2]}</div>
               </div>
               <i className="fa-regular fa-message fa-lg text-secondary"></i>
             </div>
@@ -130,9 +134,9 @@ const Dashboard = () => {
           <div className="card h-100 shadow-sms">
             <div className="card-body d-flex align-items-center justify-content-between">
               <div>
-                <div className="mb-2 fw-semibold">Remaining Credits</div>
+                <div className="mb-2 fw-semibold">{dashboardText[1]}</div>
                 <div className="fw-bold fs-3">{Number(analyticsData?.credit).toLocaleString()}</div>
-                <div className="text-muted small">Available Credits</div>
+                <div className="text-muted small">{dashboardText[3]}</div>
               </div>
               <i
                 className="fa fa-credit-card fa-lg text-secondary"
@@ -150,7 +154,7 @@ const Dashboard = () => {
             <div className="card-body">
               <div className="d-flex align-items-center justify-content-between mb-3">
                 <div className="fw-semibold fs-5">
-                  Recent credit transaction history
+                  {dashboardText[4]}
                 </div>
                 <i className="fa-solid fa-clock text-secondary fs-5"></i>
               </div>
@@ -167,7 +171,7 @@ const Dashboard = () => {
                           <i className="fa-solid fa-arrow-down"></i>
                         </span>
                         <div>
-                          <h6 className="mb-0">{history.purpose}</h6>
+                          <h6 className="mb-0">{history.purpose == '3rd party test sent' ? t("creditHistory.msgPurposeTwo") : t("creditHistory.msgPurposeOne", {count: history.recipient_count})}</h6>
                           <small className="text-muted">{history.created_at}</small>
                         </div>
                       </div>
@@ -190,7 +194,7 @@ const Dashboard = () => {
           <div className="card shadow-sms">
             <div className="card-body">
               <div className="fw-semibold fs-5 mb-3">
-                SMS sent in the last 14 days
+                {dashboardText[5]}
               </div>
               <div className="custom-height">
                 <Bar options={options} data={data} className="chart-size"/>

@@ -4,8 +4,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axiosInstance from "../../hooks/axiosInstance";
 import useAuth from "../../hooks/useAuthContext";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const {t} = useTranslation()
+  const {labels, placeholderText} = t("authForm")
+
   const navigate = useNavigate()
   const {userData, setUserData} = useAuth()
 
@@ -48,7 +52,7 @@ const Login = () => {
     localStorage.removeItem('userData')
     axiosInstance.post('/user/auth/login', formData)
                 .then(res => {
-                    toast.success(res.data.message)
+                    toast.success(t("otherText.7"))
                     localStorage.setItem('userData', JSON.stringify(res.data.user))
                     setUserData(prevUserData => (
                         {...prevUserData, userInfo: res.data.user}
@@ -61,7 +65,7 @@ const Login = () => {
                 })
                 .catch(err => {
                     console.log(err.response);
-                    toast.error("An error occured. Please, try again")
+                    toast.error(t("otherText.6"))
                     setErrorMsg(err.response.data.message)
                 })
                 .finally(() => setLoading(false))
@@ -79,12 +83,12 @@ const Login = () => {
 
         <form id="loginForm" onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label for="loginId">id</label>
+            <label for="loginId">{labels[0]}</label>
             <input 
               type="text" 
               className="form-control" 
               id="loginId" 
-              placeholder="Please enter your ID" 
+              placeholder={placeholderText[0]}
               name="userId"
               value={formData.userId}
               onChange={handleChange}
@@ -92,11 +96,11 @@ const Login = () => {
           </div>
 
           <div className="mb-4">
-            <label>password</label>
+            <label>{labels[1]}</label>
             <input 
               type="password" 
               className="form-control" 
-              placeholder="Please enter your password" 
+              placeholder={placeholderText[1]} 
               name="password"
               value={formData.password}
               onChange={handleChange}
@@ -104,15 +108,15 @@ const Login = () => {
           </div>
 
           <button type="submit" className="btn btn-dark w-100" disabled={loading}>
-            {loading ? <div class="spinner-border spinner-border-sm text-light"></div> : 'log in'}
+            {loading ? <div class="spinner-border spinner-border-sm text-light"></div> : labels[4]}
           </button>
         </form>
 
         <div className="footer">
-          Don't have an account? <NavLink to="/auth/register">Sign up</NavLink>
+          {labels[2]} <NavLink to="/auth/register">{labels[3]}</NavLink>
         </div>
         <div className="telegram">
-          inquiry <b>@SeaSMS</b>
+          {t("otherText.4")} <b>@SeaSMS</b>
         </div>
       </div>
     </div>
