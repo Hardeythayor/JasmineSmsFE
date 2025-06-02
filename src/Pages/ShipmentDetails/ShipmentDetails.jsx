@@ -140,13 +140,13 @@ const ShipmentDetails = () => {
                             {report.created_at}
                           </small>
                           <small className="text-muted d-block paragraph">
-                            {t('shipmentDetail.msgRecipient', {count: report.recipient_count})}
+                            {t('shipmentDetail.msgRecipient', {count: Number(report.recipient_count)})}
                           </small>
                         </div>
                       </td>
 
                       <td className="clickable-cell ship-paragraph2 text-end d-none d-md-table-cell">
-                        {t('shipmentDetail.msgRecipient', {count: report.recipient_count})}
+                        {t('shipmentDetail.msgRecipient', {count: Number(report.recipient_count)})}
                       </td>
                     </tr>
 
@@ -181,7 +181,7 @@ const ShipmentDetails = () => {
                                 </p>
                                 <p className="mb-2 d-flex justify-content-between paragraph">
                                   {detailsText[6]}:{" "}
-                                  <b className="mb-0 paragraph2">{t('shipmentDetail.msgRecipient', {count: report.recipient_count})}</b>
+                                  <b className="mb-0 paragraph2">{t('shipmentDetail.msgRecipient', {count: Number(report.recipient_count)})}</b>
                                 </p>
 
                                 <hr className="mb-0" />
