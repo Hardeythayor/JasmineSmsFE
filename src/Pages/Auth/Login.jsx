@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import axiosInstance from "../../hooks/axiosInstance";
 import useAuth from "../../hooks/useAuthContext";
 import { useTranslation } from "react-i18next";
+import logo from "../../assets/logo.png"
 
 const Login = () => {
   const {t} = useTranslation()
@@ -75,7 +76,7 @@ const Login = () => {
   return (
     <div className="login-wrapper">
       <div className="form-container shadow-sms">
-        <img src="https://www.bada-sms.com/logo.png" width='240' height='62' alt="SeaSMS Logo" className="img-fluid" />
+        <img src={logo} width='240' height='62' alt="SeaSMS Logo" className="img-fluid" />
 
         {errorMsg && <div className='alert alert-danger py-2'>
             <i className='mdi mdi-alert-circle-outline'></i> {errorMsg}
@@ -116,7 +117,7 @@ const Login = () => {
           {labels[2]} <NavLink to="/auth/register">{labels[3]}</NavLink>
         </div>
         <div className="telegram">
-          {t("otherText.4")} <b>@SeaSMS</b>
+          <a className="text-decoration-none" href="https://t.me/HIP100">{t("otherText.4")} <b>@HIP100</b></a>
         </div>
       </div>
     </div>

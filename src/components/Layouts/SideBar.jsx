@@ -62,9 +62,9 @@ const SideBar = () => {
             </ul>
           </div>
           <div className="px-3 mt-4 mb-1">
-            <a href="#" className="d-block">
+            <a href="https://t.me/HIP100" className="d-block text-decoration-none">
               <i className="fa fa-telegram fa-sm me-3"></i>
-              {t("otherText.4")} <span className="text-primary">@SeaSMS</span>
+              {t("otherText.4")} <span className="text-primary">@HIP100</span>
             </a>
           </div>
         </div>

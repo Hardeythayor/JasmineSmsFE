@@ -292,7 +292,7 @@ const Thirdparty = () => {
               ))}
 
               {testReport.length == 0 && (
-                <tr><td colSpan={5}><p className="text-center">No record found</p></td></tr>
+                <tr><td colSpan={5}><p className="text-center">{t("noRecord")}</p></td></tr>
               )}
             </tbody>
           </table>

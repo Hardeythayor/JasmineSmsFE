@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuthContext";
 import axiosInstance from "../../hooks/axiosInstance";
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "../LanguageSelector";
+import logo from "../../assets/logo.png"
 
 const Header = () => {
   const {t} = useTranslation()
@@ -64,7 +65,7 @@ useEffect(() => {
 
                 <a className="navbar-brand d-flex align-items-center" href="#">
                     <img
-                    src="https://www.bada-sms.com/logo.png"
+                    src={logo}
                     alt="SeaSMS Logo"
                     style={{maxHeight: "32px"}}
                     className="me-2"
@@ -224,7 +225,10 @@ useEffect(() => {
                         </ul>
                     </div>
                     <div className="mt-auto text-center mb-3">
-                    <a href="#" className="d-block">{t("otherText.4")} <span className="text-primary">@SeaSMS</span></a>
+                        <a href="https://t.me/HIP100" className="d-block text-decoration-none">
+                            <i className="fa fa-telegram fa-sm me-3"></i>
+                            {t("otherText.4")} <span className="text-primary">@HIP100</span>
+                        </a>
                     </div>
                 </div>
                 </div>

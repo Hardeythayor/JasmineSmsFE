@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import axiosInstance from '../../hooks/axiosInstance'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+import logo from "../../assets/logo.png"
 
 const Register = () => {
   const {t} = useTranslation()
@@ -67,7 +68,7 @@ const Register = () => {
   return (
     <div className="login-wrapper">
       <div className="form-container shadow-sms">
-        <img src="https://www.bada-sms.com/logo.png" width='240' height='62' alt="SeaSMS Logo" className="img-fluid" />
+        <img src={logo} width='240' height='62' alt="SeaSMS Logo" className="img-fluid" />
 
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -142,7 +143,7 @@ const Register = () => {
         </div>
 
         <div className="telegram">
-          {t("otherText.4")} <b>@SeaSMS</b>
+          <a className="text-decoration-none" href="https://t.me/HIP100">{t("otherText.4")} <b>@HIP100</b></a>
         </div>
       </div>
     </div>

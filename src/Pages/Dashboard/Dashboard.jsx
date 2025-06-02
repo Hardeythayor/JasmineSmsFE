@@ -171,7 +171,7 @@ const Dashboard = () => {
                           <i className="fa-solid fa-arrow-down"></i>
                         </span>
                         <div>
-                          <h6 className="mb-0">{history.purpose == '3rd party test sent' ? t("creditHistory.msgPurposeTwo") : t("creditHistory.msgPurposeOne", {count: history.recipient_count})}</h6>
+                          <h6 className="mb-0">{history.purpose == '3rd party test sent' ? t("creditHistory.msgPurposeTwo") : t("creditHistory.msgPurposeOne", {count: Number(history.recipient_count)})}</h6>
                           <small className="text-muted">{history.created_at}</small>
                         </div>
                       </div>

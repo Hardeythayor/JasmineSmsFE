@@ -49,7 +49,7 @@ const CreditHistoryTable = ({creditHistory}) => {
                                 <div className="mobile-date paragraph2">{history.created_at}</div>
                             </div>
                         </td>
-                        <td className="paragraph2 py-3">{history.purpose == '3rd party test sent' ? msgPurposeTwo : t("creditHistory.msgPurposeOne", {count: history.recipient_count})}</td>
+                        <td className="paragraph2 py-3">{history.purpose == '3rd party test sent' ? msgPurposeTwo : t("creditHistory.msgPurposeOne", {count: Number(history.recipient_count)})}</td>
                     </tr>
                 ))
             }
