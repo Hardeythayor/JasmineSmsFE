@@ -194,7 +194,7 @@ const ShipmentDetails = () => {
                                     style={{background: "#dcfce7", width: "75%"}}
                                   >
                                     <small>{detailsText[8]}</small>
-                                    <p className="mb-0 mt-1">{t('shipmentDetail.statusCount', {count: singleSmsReport?.success_count})}</p>
+                                    <p className="mb-0 mt-1">{t('shipmentDetail.statusCount', {count: Number(singleSmsReport?.success_count)})}</p>
                                   </div>
 
                                   <div
@@ -202,7 +202,7 @@ const ShipmentDetails = () => {
                                     style={{background: "#fee2e2", width: "20%"}}
                                   >
                                     <small>{detailsText[9]}</small>
-                                    <p className="mb-0 mt-1">{t('shipmentDetail.statusCount', {count: singleSmsReport?.fail_count})}</p>
+                                    <p className="mb-0 mt-1">{t('shipmentDetail.statusCount', {count: Number(singleSmsReport?.fail_count)})}</p>
                                   </div>
 
                                   {/* <div
