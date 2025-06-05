@@ -11,12 +11,19 @@ import SendMessage from './Pages/SendMessage/SendMessage'
 import Register from './Pages/Auth/Register'
 import useAuth from './hooks/useAuthContext'
 import ViewDetails from './Pages/ShipmentDetails/ViewDetails'
+import AdminDashboard from './Pages/Admin/AdminDashboard'
+import ManageUsers from './Pages/Admin/ManageUsers'
 
 const AppRoutes = () => {
   const {userData}  = useAuth()
 
   return (
     <Routes>
+       
+<Route path='/admin'>
+            <Route index element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><AdminDashboard /></BaseLayout> : <Navigate to="/auth/login"/>} />
+            <Route path='users' element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><ManageUsers /></BaseLayout> : <Navigate to="/auth/login"/>} />
+</Route>
         <Route path='/'>
             <Route index element={userData && userData.userInfo ? <BaseLayout><SendMessage /></BaseLayout> : <Navigate to="/auth/login"/>} />
             <Route path='dashboard' element={userData && userData.userInfo ? <BaseLayout><Dashboard /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
