@@ -242,264 +242,223 @@ const ManageUsers = () => {
 
       {isModalOpen && selectedUser && (
         <div
-          className="modal fade show"
-          style={{
-            display: "flex",
-            backgroundColor: "rgba(0, 0, 0, 0.6)",
-            alignItems: "center",
-            justifyContent: "center",
-            backdropFilter: "blur(4px)",
-          }}
+          className="modal custom-modal-wrapper"
           tabIndex="-1"
           role="dialog"
           aria-labelledby="userProfileModalLabel"
           aria-hidden="true"
+          style={{
+            display: "block",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            zIndex: 1050,
+          }}
         >
-          <div className="modal-dialog modal-xl" role="document">
+          <div
+            className="modal-dialog modal-dialog-centered modal-xl"
+            role="document"
+          >
             <div className="modal-content">
-              <div className="modal-header border-0 position-relative">
+              <div className="modal-header border-0 position-relative shadow-sm">
                 <h5>User Profile</h5>
-
                 <button
                   type="button"
-                  className="btn-close btn-close-black position-absolute"
-                  style={{ top: "1rem", right: "1rem" }}
+                  className="btn-close"
                   aria-label="Close"
                   onClick={closeProfileModal}
                 ></button>
               </div>
 
-              <div className="modal-body p-0">
-                <div className="p-4 bg-light">
-                  <div
-                    className="card  border-0 mb-4"
-                    style={{
-                      borderRadius: "12px",
-                      // background: "linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)",
-                      // border: "1px solid #dee2e6"
-                    }}
-                  >
-                    <div className="card-body p-4">
-                      <div className="d-flex align-items-start gap-4">
-                        {/* Avatar */}
-                        <img
-                          src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
-                            selectedUser.name
-                          )}&background=667eea&color=ffffff&size=80&bold=true`}
-                          alt="User Avatar"
-                          className="rounded-circle shadow-sm"
-                          width="80"
-                          height="80"
-                          style={{ border: "3px solid #667eea" }}
-                        />
+              <div className="modal-body p-4">
+                <div className="card mb-4 shadow-sm">
+                  <div className="card-body">
+                    <div className="row align-items-center">
+                      <div className="col-auto">
+                        <div
+                          className="avatar-circle bg-light text-mutted d-flex align-items-center justify-content-center"
+                          style={{
+                            width: "80px",
+                            height: "80px",
+                            borderRadius: "50%",
+                            fontSize: "24px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {selectedUser.name
+                            ? selectedUser.name.charAt(0).toUpperCase()
+                            : "U"}
+                        </div>
+                      </div>
+                      <div className="col">
+                        <p className="mb-1 text-muted">
+                          <b>Name: </b>
+                          {selectedUser.name || "User Name"}
+                        </p>
+                        <p className="text-muted mb-1">
+                          <b> Email: </b>
+                          {selectedUser.email || "user@example.com"}
+                        </p>
+                        <p className="text-muted mb-0">
+                          <b>ID:</b>
+                          {selectedUser.id || "N/A"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-                        <div className="d-flex flex-column gap-2">
-                          <div className="d-flex align-items-center">
-                            <small className="text-muted fw-semibold me-2">
-                              Full Name:
-                            </small>
-                            <span className="fw-bold text-dark">
-                              {selectedUser.name}
-                            </span>
-                          </div>
-
-                          <div className="d-flex align-items-center">
-                            <small className="text-muted fw-semibold me-2">
-                              User ID:
-                            </small>
-                            <span className="fw-bold text-dark">
-                              {selectedUser.id}
-                            </span>
-                          </div>
-
-                          <div className="d-flex align-items-center">
-                            <small className="text-muted fw-semibold me-2">
-                              Email:
-                            </small>
-                            <span className="fw-bold text-dark">
-                              {selectedUser.email}
-                            </span>
-                          </div>
+                <div className="row mb-4">
+                  <div className="col-md-6">
+                    <div
+                      className="card shadow-sm w-100"
+                      style={{
+                        backgroundColor: "#E6F0FE",
+                      }}
+                    >
+                      <div className="card-body d-flex align-items-center">
+                        <div
+                          className="d-flex justify-content-center align-items-center rounded-circle text-white flex-shrink-0"
+                          style={{
+                            backgroundColor: "#0d6efd",
+                            width: "50px",
+                            height: "50px",
+                            fontSize: "1.5rem",
+                          }}
+                        >
+                          <i className="fas fa-paper-plane"></i>
+                        </div>
+                        <div
+                          className="ms-3 text-start"
+                          style={{ flex: 1, minWidth: "120px" }}
+                        >
+                          <h3 className="mb-1 text-primary">
+                            {selectedUser.totalMessagesSent || 0}
+                          </h3>
+                          <p
+                            className="mb-0 text-muted"
+                            style={{ whiteSpace: "nowrap" }}
+                          >
+                            Total Messages
+                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="row g-3">
-
-                    <div className="col-md-6">
-                      <div
-                        className="card border-0 h-100 px-3 py-3 "
-                        style={{
-                          borderRadius: "12px",
-                          backgroundColor: "#D6E8FF",
-                        }}
-                      >
-                        <div className="d-flex align-items-center gap-3">
-                          <div
-                            className="d-flex align-items-center justify-content-center rounded-circle"
-                            style={{
-                              backgroundColor: "#116FFD",
-                              width: "50px",
-                              height: "50px",
-                            }}
-                          >
-                            <i className="fas fa-paper-plane text-white"></i>
-                          </div>
-                          <div>
-                            <h4 className="fw-bold mb-0 text-dark">20</h4>
-                            <small className="text-muted">Messages Sent</small>
-                          </div>
+                  <div className="col-md-6">
+                    <div
+                      className="card shadow-sm w-100 credit"
+                      style={{
+                        backgroundColor: "#E8FAF2",
+                      }}
+                    >
+                      <div className="card-body d-flex align-items-center">
+                        <div
+                          className="d-flex justify-content-center align-items-center rounded-circle text-white flex-shrink-0"
+                          style={{
+                            backgroundColor: "#198754",
+                            width: "50px",
+                            height: "50px",
+                            fontSize: "1.5rem",
+                          }}
+                        >
+                          <i className="fas fa-coins"></i>
                         </div>
-                      </div>
-                    </div>
-
-                    <div className="col-md-6">
-                      <div
-                        className="card border-0 h-100 px-3 py-3"
-                        style={{
-                          borderRadius: "12px",
-                          backgroundColor: "#e8fbee",
-                        }}
-                      >
-                        <div className="d-flex align-items-center gap-3">
-                          <div
-                            className="d-flex align-items-center justify-content-center rounded-circle"
-                            style={{
-                              backgroundColor: "#38ef7d",
-                              width: "50px",
-                              height: "50px",
-                            }}
+                        <div
+                          className="ms-3 text-start"
+                          style={{ flex: 1, minWidth: "120px" }}
+                        >
+                          <h3 className="mb-1 text-success">
+                            {selectedUser.availableCredit || 0}
+                          </h3>
+                          <p
+                            className="mb-0 text-muted"
+                            style={{ whiteSpace: "nowrap" }}
                           >
-                            <i className="fas fa-coins text-white"></i>
-                          </div>
-                          <div>
-                            <h4 className="fw-bold mb-0 text-dark">20</h4>
-                            <small className="text-muted">
-                              Available Credits
-                            </small>
-                          </div>
+                            Available Credits
+                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-4">
-                  <div className="d-flex align-items-center justify-content-between mb-4">
-                    <h5 className="mb-0 fw-bold text-dark">
-                      <i className="fas fa-history me-2 text-primary"></i>
-                      Message History
-                    </h5>
-                    <span className="badge bg-primary rounded-pill">
-                      2 messages
-                    </span>
-                  </div>
-
-                  <div className="table-responsive">
-                    <table className="table table-hover">
-                      <thead>
-                        <tr style={{ backgroundColor: "#f8f9fa" }}>
-                          <th className="border-0 fw-semibold text-muted py-3">
-                            Message
-                          </th>
-                          <th className="border-0 fw-semibold text-muted py-3">
-                            Recipient
-                          </th>
-                          <th className="border-0 fw-semibold text-muted py-3 text-center">
-                            Credits
-                            Used
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr className="border-bottom">
-                          <td className="py-3">
-                            <div className="d-flex align-items-start">
-                              <div>
-                                <p className="mb-1 fw-medium">
-                                  Hello Esther, your OTP is 1234.
-                                </p>
-                                <small className="text-muted">
-                                  <i className="fas fa-clock me-1"></i>2 hours
-                                  ago
-                                </small>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-3">
-                            <div className="d-flex align-items-center">
-                              <span className="fw-medium">+2348012345678</span>
-                            </div>
-                          </td>
-                          <td className="py-3 text-center">
-                            <span
-                              className="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2"
-                              style={{ fontSize: "0.875rem" }}
-                            >
-                              1 credit
-                            </span>
-                          </td>
-                        </tr>
-                        <tr className="border-bottom">
-                          <td className="py-3">
-                            <div className="d-flex align-items-start">
-                              <div>
-                                <p className="mb-1 fw-medium">
-                                  Welcome onboard! Your access .
-                                </p>
-                                <small className="text-muted">
-                                  <i className="fas fa-clock me-1"></i>1 day ago
-                                </small>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-3">
-                            <div className="d-flex align-items-center">
-                              <span className="fw-medium">+2348012345679</span>
-                            </div>
-                          </td>
-                          <td className="py-3 text-center">
-                            <span
-                              className="badge bg-warning bg-opacity-10 text-warning rounded-pill px-3 py-2"
-                              style={{ fontSize: "0.875rem" }}
-                            >
-                              2 credits
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                <h5 className="mb-2">
+                  <i className="fas fa-history me-2"></i>
+                  Message History
+                </h5>
+                <div className="card shadow-sm">
+                  <div className="card-body p-0">
+                    <div className="table-responsive">
+                      <table className="table table-hover mb-0">
+                        <thead className="table-light">
+                          <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Message</th>
+                            <th scope="col">Recipient</th>
+                            <th scope="col">Credits Used</th>
+                            <th scope="col">Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {selectedUser.messageHistory &&
+                          selectedUser.messageHistory.length > 0 ? (
+                            selectedUser.messageHistory.map(
+                              (message, index) => (
+                                <tr key={index}>
+                                  <td>{message.id || index + 1}</td>
+                                  <td>
+                                    <div
+                                      className="text-truncate"
+                                      style={{ maxWidth: "200px" }}
+                                    >
+                                      {message.content || "No message content"}
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <span className="text-dark">
+                                      {message.recipient || "Unknown"}
+                                    </span>
+                                  </td>
+                                  <td>
+                                    <span className="badge bg-primary">
+                                      {message.creditsUsed || 0}
+                                    </span>
+                                  </td>
+                                  <td className="text-muted">
+                                    {message.date
+                                      ? new Date(
+                                          message.date
+                                        ).toLocaleDateString()
+                                      : "N/A"}
+                                  </td>
+                                </tr>
+                              )
+                            )
+                          ) : (
+                            <tr>
+                              <td
+                                colSpan="5"
+                                className="text-center text-muted py-4"
+                              >
+                                No message history available
+                              </td>
+                            </tr>
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div
-                className="modal-footer border-0 bg-light"
-                style={{ padding: "1.5rem 2rem" }}
-              >
-                <div className="d-flex gap-3 ms-auto">
-                  <button
-                    type="button"
-                    className="btn btn-light border px-4 py-2"
-                    style={{ borderRadius: "8px" }}
-                    onClick={closeProfileModal}
-                  >
-                    Close
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-primary px-4 py-2"
-                    style={{
-                      borderRadius: "8px",
-                      background:
-                        "#116FFD",
-                      border: "none",
-                    }}
-                  >
-                    Edit Profile
-                  </button>
-                </div>
+              <div className="modal-footer border-0">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={closeProfileModal}
+                >
+                  Close
+                </button>
               </div>
             </div>
           </div>

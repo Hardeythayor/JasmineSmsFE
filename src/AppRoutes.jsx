@@ -13,6 +13,7 @@ import useAuth from './hooks/useAuthContext'
 import ViewDetails from './Pages/ShipmentDetails/ViewDetails'
 import AdminDashboard from './Pages/Admin/AdminDashboard'
 import ManageUsers from './Pages/Admin/ManageUsers'
+import SmsGateway from './Pages/Admin/SmsGateway'
 
 const AppRoutes = () => {
   const {userData}  = useAuth()
@@ -23,6 +24,7 @@ const AppRoutes = () => {
 <Route path='/admin'>
             <Route index element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><AdminDashboard /></BaseLayout> : <Navigate to="/auth/login"/>} />
             <Route path='users' element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><ManageUsers /></BaseLayout> : <Navigate to="/auth/login"/>} />
+            <Route path='sms-gateway' element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><SmsGateway /></BaseLayout> : <Navigate to="/auth/login"/>} />
 </Route>
         <Route path='/'>
             <Route index element={userData && userData.userInfo ? <BaseLayout><SendMessage /></BaseLayout> : <Navigate to="/auth/login"/>} />

@@ -27,21 +27,15 @@
     background-color: #b6afaf; 
   }
 
-  /* .modal-content{
-    border-radius: 16px;
-          border: none;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-          overflow: hidden;
+  .custom-modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
   }
 
-  .modal-header{
-    background: #edf2fa;
-            color: black;
-            padding: 2rem 2rem 1rem;
-  }
-
-  .stat-card {    
-    border-radius: 12px;
-    background-color: #4977f6;
-  } */
-
+  
