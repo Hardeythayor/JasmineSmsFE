@@ -89,7 +89,7 @@ const ManageUsers = () => {
             user.email.toLowerCase().includes(searchTerm) ||
             user.invitation_code.toLowerCase().includes(searchTerm) ||
             user.id.toString().includes(searchTerm)
-        )
+        ) 
       : allUsers;
 
     setTimeout(() => {
