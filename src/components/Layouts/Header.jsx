@@ -99,7 +99,7 @@ useEffect(() => {
                     </ul>
                 </div>
 
-                {/* <LanguageSelector /> */}
+                <LanguageSelector />
                 {/* <div className="dropdown d-inline-block me-3 shadow-sm">
                     <span
                     className="paragraph2 dropdown"
