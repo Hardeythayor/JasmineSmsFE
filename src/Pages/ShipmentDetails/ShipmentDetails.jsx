@@ -37,7 +37,7 @@ const ShipmentDetails = () => {
   const [pageCount, setPageCount] = useState(1);
 
   //  pagination function
-  const handlePageChange = (event, value) => {
+  const handlePageChange = (_, value) => {
     setPage(value);
   };
 
@@ -265,7 +265,7 @@ const ShipmentDetails = () => {
                 onChange={handlePageChange}
                 count={pageCount}
                 color="primary"
-                shape="rounded"
+                // shape="rounded"
                 size="small"
                 page={page}
             />

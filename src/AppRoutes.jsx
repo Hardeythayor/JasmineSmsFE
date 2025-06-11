@@ -12,22 +12,17 @@ import Register from './Pages/Auth/Register'
 import useAuth from './hooks/useAuthContext'
 import ViewDetails from './Pages/ShipmentDetails/ViewDetails'
 import AdminDashboard from './Pages/Admin/AdminDashboard'
-import ManageUsers from './Pages/Admin/ManageUsers'
 import SmsGateway from './Pages/Admin/SmsGateway'
+import ManageUsers from './Pages/Admin/ManageUsers/ManageUsers'
+import OtherSettingsIndex from './Pages/Admin/OtherSettings/OtherSettingsIndex'
 
 const AppRoutes = () => {
   const {userData}  = useAuth()
 
   return (
     <Routes>
-       
-<Route path='/admin'>
-            <Route index element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><AdminDashboard /></BaseLayout> : <Navigate to="/auth/login"/>} />
-            <Route path='users' element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><ManageUsers /></BaseLayout> : <Navigate to="/auth/login"/>} />
-            <Route path='sms-gateway' element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><SmsGateway /></BaseLayout> : <Navigate to="/auth/login"/>} />
-</Route>
         <Route path='/'>
-            <Route index element={userData && userData.userInfo ? <BaseLayout><SendMessage /></BaseLayout> : <Navigate to="/auth/login"/>} />
+            <Route index element={userData && userData.userInfo ? <BaseLayout>{userData.userInfo.user_type === 'admin' ? <Navigate to="/admin"/>:<SendMessage />}</BaseLayout> : <Navigate to="/auth/login"/>} />
             <Route path='dashboard' element={userData && userData.userInfo ? <BaseLayout><Dashboard /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
             <Route path='settings' element={userData && userData.userInfo ? <BaseLayout><Setting /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
             <Route path='credits' element={userData && userData.userInfo ? <BaseLayout><CreditHistory /></BaseLayout> : <Navigate to="/auth/login"/>}></Route>
@@ -38,6 +33,13 @@ const AppRoutes = () => {
             <Route path="auth">
                 <Route path="login" element={userData && userData.userInfo ? <Navigate to='/' /> : <Login />} />
                 <Route path="register" element={userData && userData.userInfo ? <Navigate to='/' /> : <Register />} />
+            </Route>
+
+            <Route path='admin'>
+              <Route index element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><AdminDashboard /></BaseLayout> : <Navigate to="/auth/login"/>} />
+              <Route path='users' element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><ManageUsers /></BaseLayout> : <Navigate to="/auth/login"/>} />
+              <Route path='sms-gateway' element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><SmsGateway /></BaseLayout> : <Navigate to="/auth/login"/>} />
+              <Route path='other-settings' element={userData && userData.userInfo && userData.userInfo.user_type === 'admin' ? <BaseLayout><OtherSettingsIndex /></BaseLayout> : <Navigate to="/auth/login"/>} />
             </Route>
         </Route>
     </Routes>

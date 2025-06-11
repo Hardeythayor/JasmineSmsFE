@@ -6,13 +6,14 @@ export const AuthContext = createContext(null)
 const AuthContextProvider = ({children}) => {
     const [userData, setUserData] = useState({
         userInfo: null,
-        authIsReady: false
+        authIsReady: false,
+        smsCharge: 0
     })
 
     const resetUser = () => {
         setUserData({
             userInfo: null,
-            authIsReady: true
+            authIsReady: true,
         })
     }
 
@@ -39,8 +40,21 @@ const AuthContextProvider = ({children}) => {
         }
     }
 
+    const fetchSmsCharge = () => {
+        axiosInstance.get("/user/message/charge")
+            .then(res => {
+                setUserData(prevUserData => (
+                    {...prevUserData, smsCharge: res.data.data}
+                ))
+            })
+            .catch(err => {
+                console.log(err.response);
+            })
+    }
+
     useEffect(() => {
         fetchUserDetails()
+        fetchSmsCharge()
     }, [])
 
     const value = {

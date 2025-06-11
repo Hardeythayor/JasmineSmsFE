@@ -36,7 +36,7 @@ import useAuth from '../../hooks/useAuthContext';
 const BaseLayout = ({ children }) => {
   const { userData } = useAuth(); 
 
-  const isAdmin = userData && userData.userInfo && userData.userInfo.user_type === 'admin';
+  const isAdmin = userData?.userInfo?.user_type === 'admin';
 
   return (
     <div>

@@ -32,6 +32,12 @@ const AdminSideBar = () => {
                   SMS Gateway
                 </NavLink>
               </li>
+              <li className="nav-item paragraph2">
+                <NavLink className="nav-link" to="/admin/other-settings">
+                  <i className="fas fa-cog fa-sm text-black me-3"></i>
+                  Other Settings
+                </NavLink>
+              </li>
             </ul>
           </div>
            <div className="px-3 mt-4 mb-1">
