@@ -7,13 +7,15 @@ const AuthContextProvider = ({children}) => {
     const [userData, setUserData] = useState({
         userInfo: null,
         authIsReady: false,
-        smsCharge: 0
+        smsCharge: 0,
+        smsInfo: null
     })
 
     const resetUser = () => {
         setUserData({
             userInfo: null,
             authIsReady: true,
+            smsInfo: null
         })
     }
 
@@ -52,16 +54,35 @@ const AuthContextProvider = ({children}) => {
             })
     }
 
+    const fetchSmsAnalytics = () => {
+        axiosInstance.get('/user/dashboard/me')
+        .then(res => {
+            setUserData(prevUserData => (
+                {...prevUserData, smsInfo: res.data.data}
+            ))
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
     useEffect(() => {
         fetchUserDetails()
-        fetchSmsCharge()
     }, [])
+
+    useEffect(() => {
+        if(userData.userInfo) {
+            fetchSmsCharge()
+            fetchSmsAnalytics()
+        }
+    }, [userData.userInfo])
 
     const value = {
         userData,
         setUserData,
         resetUser,
-        fetchUserDetails
+        fetchUserDetails,
+        fetchSmsAnalytics
     }
 
     return (

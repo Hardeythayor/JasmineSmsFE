@@ -11,27 +11,28 @@ const Header = () => {
 
   const {userData, resetUser} = useAuth()
   const navigate = useNavigate()
+  
 
   const isAdmin = userData?.userInfo?.user_type === 'admin';
 
-const logout = () => {
-    const url = '/user/auth/logout'
-    const loginPath  = '/auth/login'
-    
+    const logout = () => {
+        const url = '/user/auth/logout'
+        const loginPath  = '/auth/login'
+        
 
-    axiosInstance.post(url)
-        .then(res => {
-            localStorage.removeItem('userData')
-            resetUser()
-            navigate(loginPath)
-        })
-        .catch((err) => {
-            if (err.response.status == '401'){
+        axiosInstance.post(url)
+            .then(res => {
                 localStorage.removeItem('userData')
+                resetUser()
                 navigate(loginPath)
-            }
-        })
-}
+            })
+            .catch((err) => {
+                if (err.response.status == '401'){
+                    localStorage.removeItem('userData')
+                    navigate(loginPath)
+                }
+            })
+    }
 
   return (
     <>
@@ -60,15 +61,15 @@ const logout = () => {
                 </div>
                 <div className="d-flex align-items-center ms-auto">
                 {/* <!-- <span className="badge rounded-pill paragraph2 d-none d-lg-inline me-4">806 cases</span> --> */}
-                <div className="dropdown d-inline">
+                {!isAdmin && <div className="dropdown d-inline">
                     <span
-                    className="badge text-dark rounded-pill paragraph2 d-none d-lg-inline me-5 dropdown"
-                    data-bs-toggle="dropdown"
-                    role="button"
-                    aria-expanded="false"
-                    id="casesDropdown"
+                        className="badge text-dark rounded-pill paragraph2 d-none d-lg-inline me-5 dropdown"
+                        data-bs-toggle="dropdown"
+                        role="button"
+                        aria-expanded="false"
+                        id="casesDropdown"
                     >
-                    806{t("dashboard.dashboardText.7")}
+                    {Number(Math.floor(userData?.smsInfo?.credit / userData?.smsCharge)).toLocaleString()}{t("dashboard.dashboardText.7")}
                     </span>
 
                     <ul
@@ -82,7 +83,7 @@ const logout = () => {
                         <span>{userData?.smsCharge}{t("otherText.1")}</span>
                     </div>
                     </ul>
-                </div>
+                </div>}
 
                 {/* <LanguageSelector /> */}
                 {/* <div className="dropdown d-inline-block me-3 shadow-sm">
