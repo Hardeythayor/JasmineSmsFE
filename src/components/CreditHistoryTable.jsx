@@ -14,7 +14,7 @@ const CreditHistoryTable = ({creditHistory}) => {
     } = t("creditHistory")
 
   return (
-    <div className="table-responsive">
+    <div className="table-responsive custom-table">
       <table className="table table-hover table-lg table-bordered-outer p-1">
         <thead>
           <tr>
