@@ -20,7 +20,7 @@ const AdminDashboard = () => {
   const { pageHeading, dashboardText } = t("dashboard");
 
   const analyticsData = {
-    total_sms: 12000,
+    total_sms: 12000, 
     credit: 5000,
   };
 
