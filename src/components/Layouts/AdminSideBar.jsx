@@ -38,6 +38,11 @@ const AdminSideBar = () => {
                   Other Settings
                 </NavLink>
               </li>
+              <li className="nav-item paragraph2">
+                <NavLink className="nav-link" to="/settings">
+                  <i className="mdi mdi-cog-outline me-3"></i>Setting
+                </NavLink>
+              </li>
             </ul>
           </div>
            <div className="px-3 mt-4 mb-1">

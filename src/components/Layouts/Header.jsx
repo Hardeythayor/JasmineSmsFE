@@ -12,7 +12,7 @@ const Header = () => {
   const {userData, resetUser} = useAuth()
   const navigate = useNavigate()
 
-  const [smsCharge, setSmsCharge] = useState(16)
+  const isAdmin = userData?.userInfo?.user_type === 'admin';
 
 const logout = () => {
     const url = '/user/auth/logout'
@@ -32,21 +32,6 @@ const logout = () => {
             }
         })
 }
-
-const fetchSmsCharge = () => {
-  axiosInstance.get("/user/message/charge")
-    .then(res => {
-      setSmsCharge(res.data.data)
-    })
-    .catch(err => {
-      console.log(err.response);
-      toast.error(t("otherText.6"))
-    })
-}
-
-useEffect(() => {
-    fetchSmsCharge()
-  }, [])
 
   return (
     <>
@@ -94,7 +79,7 @@ useEffect(() => {
                     <li className="fw-bold mb-2">{t("otherText.0")}</li>
                     <div className="d-flex justify-content-between">
                         <span>SMS</span>
-                        <span>{smsCharge}{t("otherText.1")}</span>
+                        <span>{userData?.smsCharge}{t("otherText.1")}</span>
                     </div>
                     </ul>
                 </div>
@@ -208,22 +193,35 @@ useEffect(() => {
                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body d-flex flex-column h-100">
-                    <div>
-                        <h6 className="sidebar-heading mt-4 mb-1 sub-heading">{t("sideBarHeading.0")}</h6>
-                        <ul className="nav flex-column mb-2">
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/" id="mobile-sidebar-send-text">{t("thirdPartyTest.pageHeading")}</NavLink></li>
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/test" id="mobile-sidebar-third-party-test">{t("thirdPartyTest.pageHeading")}</NavLink></li>
-                        </ul>
-                        <h6 className="sidebar-heading mt-4 mb-1 sub-heading">{t("sideBarHeading.1")}</h6>
-                        <ul className="nav flex-column mb-2">
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/dashboard">{t("dashboard.pageHeading")}</NavLink></li>
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/messages">{t("shipmentDetail.pageHeading")}</NavLink></li>
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/credits">{t("creditHistory.pageHeading")}</NavLink></li>
-                        </ul>
-                        <ul className="nav flex-column mb-2 mt-4">
-                            <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/settings">{t("settings.pageHeading")}</NavLink></li>
-                        </ul>
-                    </div>
+                    {isAdmin ?
+                            <div>
+                                <h6 className="sidebar-heading mt-4 mb-1 sub-heading">Admin Navigation</h6>
+                                <ul className="nav flex-column mb-2">
+                                    <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/admin" id="mobile-sidebar-send-text">Dashboard</NavLink></li>
+                                    <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/admin/users" id="mobile-sidebar-third-party-test">Manage Users</NavLink></li>
+                                    <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/admin/sms-gateway" id="mobile-sidebar-third-party-test">SMS Gateway</NavLink></li>
+                                    <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/admin/other-settings" id="mobile-sidebar-third-party-test">Other Settings</NavLink></li>
+                                    <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/settings" id="mobile-sidebar-third-party-test">Setting</NavLink></li>
+                                </ul>
+                            </div>
+                        :
+                            <div>
+                                <h6 className="sidebar-heading mt-4 mb-1 sub-heading">{t("sideBarHeading.0")}</h6>
+                                <ul className="nav flex-column mb-2">
+                                    <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/" id="mobile-sidebar-send-text">{t("thirdPartyTest.pageHeading")}</NavLink></li>
+                                    <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/test" id="mobile-sidebar-third-party-test">{t("thirdPartyTest.pageHeading")}</NavLink></li>
+                                </ul>
+                                <h6 className="sidebar-heading mt-4 mb-1 sub-heading">{t("sideBarHeading.1")}</h6>
+                                <ul className="nav flex-column mb-2">
+                                    <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/dashboard">{t("dashboard.pageHeading")}</NavLink></li>
+                                    <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/messages">{t("shipmentDetail.pageHeading")}</NavLink></li>
+                                    <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/credits">{t("creditHistory.pageHeading")}</NavLink></li>
+                                </ul>
+                                <ul className="nav flex-column mb-2 mt-4">
+                                    <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/settings">{t("settings.pageHeading")}</NavLink></li>
+                                </ul>
+                            </div>
+                    }
                     <div className="mt-auto text-center mb-3">
                         <a href="https://t.me/HIP100" className="d-block text-decoration-none">
                             <i className="fa fa-telegram fa-sm me-3"></i>
