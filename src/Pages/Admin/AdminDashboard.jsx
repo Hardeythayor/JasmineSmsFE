@@ -105,21 +105,18 @@ const AdminDashboard = () => {
         subtitle: dashboardText[2] || 'Overall total',
         icon: 'fa-regular fa-message',
         suffix: dashboardText[7] || 'messages',
-        color: 'primary'
       },
       {
         title: dashboardText[12] || 'Total Users',
         value: analyticsData.users.total_users,
         subtitle: dashboardText[13] || 'Total registered users',
         icon: 'fa fa-users',
-        color: 'warning'
       },
       {
         title: dashboardText[10] || 'Total Credit',
         value: analyticsData.financial.total_credit,
         subtitle: dashboardText[11] || 'Total credit across all users',
         icon: 'fa fa-credit-card',
-        color: 'success'
       }
     ],
     [
@@ -130,7 +127,6 @@ const AdminDashboard = () => {
         subtitle: dashboardText[9] || 'Total direct messages sent',
         icon: 'fa-solid fa-paper-plane',
         suffix: dashboardText[7] || 'messages',
-        color: 'info'
       },
       {
         title: dashboardText[14] || 'Total Test SMS',
@@ -138,7 +134,6 @@ const AdminDashboard = () => {
         subtitle: dashboardText[15] || 'Total test messages sent',
         icon: 'fa-solid fa-vial-circle-check',
         suffix: dashboardText[7] || 'messages',
-        color: 'secondary'
       },
       {
         title: dashboardText[16] || 'Total Completed',
@@ -146,8 +141,6 @@ const AdminDashboard = () => {
         subtitle: dashboardText[17] || 'Total successfully completed messages',
         icon: 'fa-solid fa-check-circle',
         suffix: dashboardText[7] || 'messages',
-        color: 'success',
-        iconColor: '#28a745'
       },
       {
         title: dashboardText[18] || 'Total Failed',
@@ -155,8 +148,6 @@ const AdminDashboard = () => {
         subtitle: dashboardText[19] || 'Total failed messages',
         icon: 'fa-solid fa-times-circle',
         suffix: dashboardText[7] || 'messages',
-        color: 'danger',
-        iconColor: '#dc3545'
       }
     ]
   ];
@@ -177,7 +168,6 @@ const AdminDashboard = () => {
           <div className="d-flex align-items-center">
             <i 
               className={`${card.icon} fa-lg text-secondary`}
-              style={card.iconColor ? { color: card.iconColor } : {}}
             ></i>
           </div>
         </div>
