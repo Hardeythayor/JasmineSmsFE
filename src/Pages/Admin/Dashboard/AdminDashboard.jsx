@@ -170,7 +170,7 @@ const AdminDashboard = () => {
           <div className="flex-grow-1">
             <div className="mb-2 fw-semibold text-muted small">{card.title}</div>
             <div className="fw-bold fs-4 mb-1">
-              {card.value?.toLocaleString()}
+              {Number(card?.value).toLocaleString()}
               {card.suffix && <span className="fs-6 text-muted ms-1">{card.suffix}</span>}
             </div>
             <div className="text-muted small">{card.subtitle}</div>
