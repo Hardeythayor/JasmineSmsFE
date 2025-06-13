@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,7 +10,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { useTranslation } from "react-i18next";
-import Loader from "../../components/utilities/Loader/Loader";
+import axiosInstance from "../../../hooks/axiosInstance";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -18,50 +18,58 @@ const AdminDashboard = () => {
   const { t } = useTranslation();
   const { pageHeading, dashboardText } = t("dashboard");
 
-  const analyticsData = {
-    messaging: {
-      total_sms: 12000,
-      direct_sms: 5000,
-      test_sms: 200,
-      completed: 11800,
-      failed: 200,
-    },
-    financial: {
-      total_credit: 15000,
-      current_credit: 5000,
-    },
-    users: {
-      total_users: 150,
-    },
-    performance: {
-      success_rate: ((11800 / 12000) * 100).toFixed(1),
-      failure_rate: ((200 / 12000) * 100).toFixed(1),
-    }
-  };
+  const [analyticsLoading, setAnalyticsLoading] = useState(false)
+  const [historyLoading, setHistoryLoading] = useState(false)
+  const [chartLoading, setChartLoading] = useState(false)
+  const [analyticsData, setAnalyticsData] = useState([])
+  const [creditHistory, setCreditHistory] = useState([])
+  const [chartData, setChartData] = useState([])
 
-  const creditHistory = [
-    { 
-      id: 1, 
-      type: 'charge', 
-      purpose: 'bulk_sms', 
-      recipient_count: 100, 
-      amount: 200, 
-      created_at: '2025-06-12' 
-    },
-    { 
-      id: 2, 
-      type: 'debit', 
-      purpose: 'single_sms', 
-      recipient_count: 1, 
-      amount: 5, 
-      created_at: '2025-06-10' 
-    },
-  ];
+  const fetchSmsAnalytics = () => {
+    setAnalyticsLoading(true)
+    axiosInstance.get('/admin/dashboard/analytics')
+      .then(res => {
+        setAnalyticsData(res.data.data)
+      })
+      .catch(err => {
+        console.log(err)
+        toast.error(err.response.data.message)
+      })
+      .finally(() => setAnalyticsLoading(false))
+  }
 
-  const chartData = {
-    days: ['10/01', '10/02', '10/03', '10/04', '10/05', '10/06', '10/07', '10/08', '10/09', '10/10', '10/11', '10/12', '10/13', '10/14'],
-    sms_count: [100, 200, 150, 300, 250, 180, 220, 280, 190, 350, 400, 320, 210, 260], 
-  };
+  const fetchUserCreditHistory = () => {
+    setHistoryLoading(true)
+    axiosInstance.post(`/user/credit/history`)
+        .then(res => {
+            setCreditHistory(res.data.data.data.slice(0,10))
+        })
+        .catch(err => {
+            console.log(err.response)
+            toast.error(err.response.message)
+        })
+        .finally(() => setHistoryLoading(false))
+  }
+
+  const fetchSmsChartData = () => {
+    setChartLoading(true)
+    axiosInstance.get('/admin/dashboard/chart_data')
+        .then(res => {
+            setChartData(res.data.data)
+        })
+        .catch(err => {
+            console.log(err.response)
+            toast.error(err.response.message)
+        })
+        .finally(() => setChartLoading(false))
+  }
+
+  useEffect(() => {
+      fetchSmsAnalytics()
+      fetchUserCreditHistory()
+      fetchSmsChartData()
+  }, [])
+
 
   const chartOptions = {
     responsive: true,
@@ -83,75 +91,17 @@ const AdminDashboard = () => {
     },
   };
 
-  const chartConfig = {
-    labels: chartData.days,
+  let data = {
+    labels: chartData?.days,
     datasets: [
       {
-        label: dashboardText[6] || 'SMS Count',
-        data: chartData.sms_count,
-        backgroundColor: 'rgba(59, 130, 246, 0.8)',
-        borderColor: 'rgb(59, 130, 246)',
-        borderWidth: 1,
-        borderRadius: 4,
+        label: 'Number of Shipments',
+        data: chartData?.sms_count,
+        // data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+        backgroundColor: 'rgb(59, 130, 246)',
       },
     ],
   };
-
-  const analyticsCards = [
-    [
-      {
-        title: dashboardText[0] || 'Total SMS',
-        value: analyticsData.messaging.total_sms,
-        subtitle: dashboardText[2] || 'Overall total',
-        icon: 'fa-regular fa-message',
-        suffix: dashboardText[7] || 'messages',
-      },
-      {
-        title: dashboardText[12] || 'Total Users',
-        value: analyticsData.users.total_users,
-        subtitle: dashboardText[13] || 'Total registered users',
-        icon: 'fa fa-users',
-      },
-      {
-        title: dashboardText[10] || 'Total Credit',
-        value: analyticsData.financial.total_credit,
-        subtitle: dashboardText[11] || 'Total credit across all users',
-        icon: 'fa fa-credit-card',
-      }
-    ],
-    [
-      {
-        
-        title: dashboardText[8] || 'Total Direct SMS',
-        value: analyticsData.messaging.direct_sms,
-        subtitle: dashboardText[9] || 'Total direct messages sent',
-        icon: 'fa-solid fa-paper-plane',
-        suffix: dashboardText[7] || 'messages',
-      },
-      {
-        title: dashboardText[14] || 'Total Test SMS',
-        value: analyticsData.messaging.test_sms,
-        subtitle: dashboardText[15] || 'Total test messages sent',
-        icon: 'fa-solid fa-vial-circle-check',
-        suffix: dashboardText[7] || 'messages',
-      },
-      {
-        title: dashboardText[16] || 'Total Completed',
-        value: analyticsData.messaging.completed,
-        subtitle: dashboardText[17] || 'Total successfully completed messages',
-        icon: 'fa-solid fa-check-circle',
-        suffix: dashboardText[7] || 'messages',
-      },
-      {
-        title: dashboardText[18] || 'Total Failed',
-        value: analyticsData.messaging.failed,
-        subtitle: dashboardText[19] || 'Total failed messages',
-        icon: 'fa-solid fa-times-circle',
-        suffix: dashboardText[7] || 'messages',
-      }
-    ]
-  ];
-  
 
   const renderAnalyticsCard = (card, index) => (
     <div key={index} className={`col-12 col-md-${12 / analyticsCards.find(row => row.includes(card)).length}`}>

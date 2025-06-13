@@ -105,7 +105,7 @@ const ManageUsers = () => {
                 <th>#</th>
                 <th>User ID</th>
                 <th>Name</th>
-                <th>Email</th>
+                <th>Remaining SMS</th>
                 <th>Invitation Code</th>
                 <th>Status</th>
                 <th width="5%">Action</th>
@@ -118,7 +118,7 @@ const ManageUsers = () => {
                     <td>{i+1}</td>
                     <td>{user.userid}</td>
                     <td>{user.name}</td>
-                    <td>{user.email ? user.email : '-'}</td>
+                    <td>{user.remaining_sms ? user.remaining_sms : '-'}</td>
                     <td>{user.invite_code ? user.invite_code : '-'}</td>
                     <td>
                       <span
