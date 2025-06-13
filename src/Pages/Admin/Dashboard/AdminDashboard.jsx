@@ -242,6 +242,7 @@ const AdminDashboard = () => {
       </div>
 
       {renderAnalyticsRows()}
+      {analyticsLoading && <Loader />}
 
       {/* <div className="row g-4 mb-4">
         <div className="col-12">
