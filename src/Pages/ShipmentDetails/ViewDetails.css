@@ -1,0 +1,71 @@
+.heading-view {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 24px;
+    color: rgb(10, 10, 10);
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #212529;
+    margin-bottom: 24px;
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.card {
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+}
+
+.card-body {
+    padding: 24px;
+}
+
+
+.status-box {
+    border-radius: 6px;
+    padding: 20px;
+    height: 100%;
+}
+
+.status-success {
+    background-color: #F0FDF4;
+}
+
+.status-failed {
+    background-color: #FEF2F1;
+}
+
+.status-waiting {
+    background-color: #F3F4F6;
+}
+
+.status-cancel {
+    background-color: #FEE2E2;
+}
+
+.table {
+    margin-bottom: 0;
+    border-radius: 5px;
+}
+
+.table-responsive {
+    border-radius: 5px;
+}
+
+@media (max-width: 576px) {
+    .mobile-th {
+        font-size: 12px;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+}

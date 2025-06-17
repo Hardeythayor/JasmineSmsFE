@@ -1,0 +1,85 @@
+{
+    "noRecord": "기록을 찾을 수 없습니다",
+    "sideBarHeading": ["발송 관리", "내역 관리"],
+    "authForm": {
+        "labels": [
+            "아이디", "비밀번호", "계정이 없으신가요?", "회원가입", "로그인", "초대 코드", "이름", 
+            "비밀번호 확인","회원가입", "이미 계정이 있으신가요?"
+        ],
+        "placeholderText": [
+            "아이디를 입력하세요", "비밀번호를 입력하세요", "초대 코드를 입력해주세요", "영문, 숫자, 언더스코어(_) 사용 가능",
+            "이름을 입력해주세요"
+        ]
+    },
+    "messageText": ["이모티콘", "단축 URL", "다시 쓰기", "테스트할 메시지를 입력해주세요", "테스트 시작", "전체 초기화", "메시지 작성", "발송할 메시지 내용을 입력해주세요"],
+    "otherText": [
+        "메시지 단가 안내메시지 단가 안내", "크레딧", "프로필 설정", "로그아웃", "문의", "메시지를 성공적으로 보냈습니다", "오류가 발생했습니다. 다시 시도해 주세요",
+        "로그인 성공", "회원가입 완료", "유효하지 않은 번호"
+    ],
+    "homePage": {
+        "pageHeading": "문자 발송",
+        "pageSubHeading": "SMS 메시지를 작성하고 발송할 수 있습니다",
+        "recipientField": [
+            "수신번호 입력", "전화번호를 입력해주세요. 여러 번호는 쉼표(,) 또는 줄바꿈으로 구분됩니다.", "번호 고정", "정렬", "중복제거", "붙여넣기", 
+            "하이픈(-) 및 특수문자는 자동으로 제거됩니다", "+8210, 8210, 010, 10 형식 모두 지원됩니다", "중복된 번호 허용됩니다 (필요시 중복제거 버튼 사용)", 
+            "잘못된 형식의 번호는 제외됩니다", "발송하기"
+        ],
+        "recipientTotal": "총 {{count}}개",
+        "recentShipmentField": ["최근 발송내역", "최근 10개의 발송 내역입니다", "최근 발송 내역이 없습니다"],
+        "sendingSettingsField": [
+            "발송 설정", "즉시 발송", "예약 발송", "분할 발송 설정", "메시지를 나누어 순차적으로 발송합니다", 
+            "사용 안함", "사용", "건씩"
+        ]
+    },
+    "settings": {
+        "pageHeading": "설정",
+        "pageSubHeading": "계정 설정을 관리합니다",
+        "formHeading": "비밀번호 변경",
+        "formSubHeading": "계정의 비밀번호를 변경할 수 있습니다",
+        "oldPasswordLabel": "현재 비밀번호",
+        "passwordLabel": "새 비밀번호",
+        "confirmPasswordLabel": "새 비밀번호 확인",
+        "submitButton": "비밀번호 변경"
+    },
+    "creditHistory": {
+        "pageHeading": "크레딧 내역",
+        "filterOne": "전체",
+        "filterTwo": "충전/환불",
+        "filterThree": "차감",
+        "tHOne": "일시",
+        "tHTwo": "구분",
+        "thThree": "금액",
+        "thFour": "내용",
+        "badgeOne": "차감",
+        "badgeTwo": "충전",
+        "msgPurposeOne_one": "메시지 발송 ({{count}}건)",
+        "msgPurposeOne_other": "메시지 발송 ({{count}}건)",
+        "msgPurposeTwo": "3사 테스트 발송"
+    },
+    "shipmentDetail": {
+        "pageHeading": "발송 내역",
+        "filterPlaceholder": "내용으로 검색",
+        "tHOne": "발송 시간",
+        "tHTwo": "유형",
+        "thThree": "내용",
+        "thFour": "수신자",
+        "badgeOne": "즉시",
+        "badgeTwo": "예정된",
+        "msgRecipient_one": "{{count}}명",
+        "msgRecipient_other": "{{count}}명",
+        "detailsText": ["상태", "완료", "불완전한", "메시지 내용", "발송 정보", "발송 유형", 
+        "수신자 수", "발송 상태", "성공", "실패", "발송 시간", "보내다"],
+        "statusCount_one": "{{count}}개",
+        "statusCount_other": "{{count}}개"
+    },
+    "dashboard": {
+        "pageHeading": "대시보드",
+        "dashboardText": ["총 발송 SMS", "잔여 크레딧", "총 수신자 기준 SMS 발송량", "사용 가능한 크레딧", 
+        "최근 크레딧 거래내역", "최근 14일간 SMS 발송량", "배송 건수", "건"]
+    },
+    "thirdPartyTest": {
+        "pageHeading": "3사 테스트",
+        "pageSubHeading": "메시지 발송 전 테스트를 통해 정상 발송 여부를 확인할 수 있습니다",
+        "tableText": ["최근 테스트 결과", "시간", "내용"]
+    }
+}
