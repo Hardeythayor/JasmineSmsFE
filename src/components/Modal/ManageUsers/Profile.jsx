@@ -48,11 +48,11 @@ const UserProfile = ({ close, selectedUser }) => {
         setLoading(true)
             axiosInstance.post(`/user/message/report/${selectedUser?.id}?page=${page}`)
                 .then(res => {
-                setSmsReport(res.data.data.data)
-                const pageCount = Math.ceil(
-                    res.data.data.total / res.data.data.per_page
-                );
-                setPageCount(pageCount);
+                  setSmsReport(res.data.data.data)
+                  const pageCount = Math.ceil(
+                      res.data.data.total / res.data.data.per_page
+                  );
+                  setPageCount(pageCount);
                 })
                 .catch(err => {s
                     console.log(err.response);
