@@ -44,7 +44,7 @@
     "creditHistory": {
         "pageHeading": "크레딧 내역",
         "filterOne": "전체",
-        "filterTwo": "충전/환불",
+        "filterTwo": "충전",
         "filterThree": "차감",
         "tHOne": "일시",
         "tHTwo": "구분",

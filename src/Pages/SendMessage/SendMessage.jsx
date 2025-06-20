@@ -295,7 +295,7 @@ const fetchSmsCharge = () => {
             {pageSubHeading}
           </p>
         </div>
-        <button className="btn btn-outline-secondary text-black fw-semibold" onClick={handleFullInitialization}>
+        <button className="btn btn-outline-secondary text-black fw-semibold mt-5" onClick={handleFullInitialization}>
           <i className="fa fa-refresh me-1 p-2" aria-hidden="true"></i> {t("messageText.5")}
         </button>
       </div>
@@ -351,8 +351,18 @@ const fetchSmsCharge = () => {
 
                 <textarea
                   id="messageTextarea"
-                  className="form-control mb-2 paragraph4"
-                  rows="11"
+                  className="form-control mb-2 paragraph4 d-none d-lg-block"
+                  rows="20"
+                  placeholder={t("messageText.3")}
+                  ref={textareaRef}
+                  value={formData.content}
+                  name="content"
+                  onChange={handleChange}
+                />
+                <textarea
+                  id="messageTextarea"
+                  className="form-control mb-2 paragraph4 d-lg-none"
+                  rows="8"
                   placeholder={t("messageText.3")}
                   ref={textareaRef}
                   value={formData.content}
@@ -365,8 +375,8 @@ const fetchSmsCharge = () => {
               </div>
             </div>
           </div>
-          <div className="card">
-            <div className="card-body gap-3 p-4 align-items-center shadow-sm">
+          {/* <div className="card shadow-sms">
+            <div className="card-body gap-3 p-4 align-items-center">
               <h5 className="fw-semibold sub-heading ms-0">{sendingSettingsField[0]}</h5>
 
               <div
@@ -424,9 +434,6 @@ const fetchSmsCharge = () => {
                         className="btn btn-outline-secondary text-black h-9 w-100  align-items-center d-flex justify-content-left"
                       >
                         <i className="mdi mdi-calendar me-3"></i>
-                        {/* {date && <Moment format='DD MMM'>
-                                        {date}
-                                    </Moment>} */}
                         {date}
                       </button>
                       <input
@@ -523,7 +530,7 @@ const fetchSmsCharge = () => {
               </div>
             </div>
           </div>
-          <div className="card shadow-sm">
+          <div className="card shadow-sms">
             <div className="card-body p-4">
               <span className="sub-heading ms-0">{recentShipmentField[0]}</span>
               <p className="text-muted paragraph">
@@ -533,11 +540,11 @@ const fetchSmsCharge = () => {
                 {recentShipmentField[2]}
               </p>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="col-12 col-xl-4">
-          <div className="card">
-            <div className="card-body p-4 shadow-sm">
+          <div className="card shadow-sms">
+            <div className="card-body p-4">
               <div className="d-flex justify-content-between align-items-center">
                 <h5 className="card-title sub-heading ms-0">
                   {recipientField[0]}

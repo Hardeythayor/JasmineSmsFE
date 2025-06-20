@@ -77,7 +77,14 @@ const ShipmentDetails = () => {
                     .finally(() => setSingleLoading(false))
   }
 
-  const toggleSelection = (i, rec) => {
+  const toggleSelection = async (i, rec) => {
+      const expandedRows = document.querySelectorAll('.to-be-hidden');
+      
+      expandedRows.forEach(row => {
+        row.classList.add('d-none')
+      });
+
+
       const row = document.getElementById(`expanded${i}`)
       row.classList.toggle('d-none');
       fetchSingleSmsReport(rec.id)
@@ -150,7 +157,7 @@ const ShipmentDetails = () => {
                       </td>
                     </tr>
 
-                    <tr className="d-none" key={`expanded${i}`} id={`expanded${i}`}>
+                    <tr className="d-none to-be-hidden" key={`expanded${i}`} id={`expanded${i}`}>
                       <td colSpan="4">
                         <div className="card shadow-sm expanded-content no-border-card">
                           <div className="card-body">
