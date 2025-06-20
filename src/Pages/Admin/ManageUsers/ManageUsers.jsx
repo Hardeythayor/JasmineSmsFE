@@ -8,6 +8,7 @@ import "./ManageUsers.css";
 import { Modal } from "react-bootstrap";
 import UserProfile from "../../../components/Modal/ManageUsers/Profile";
 import RechargeCredit from "../../../components/Modal/ManageUsers/RechargeCredit";
+import ResetUserPassword from "../../../components/Modal/ManageUsers/ResetUserPassword";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -18,7 +19,8 @@ const ManageUsers = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [creditOpen, setCreditOpen] = useState(false)
-
+  const [changePasswordOpen, setChangePasswordOpen] = useState(false)
+ 
   const handleFilterChange = (e) => {
     setFilter({ ...filter, search: e.target.value });
   };
@@ -62,6 +64,11 @@ const ManageUsers = () => {
   const openCreditRechargeModal = (currentUser) => {
     setSelectedUser(currentUser)
     setCreditOpen(true)
+  }
+
+  const openPasswordChangeModal = (currentUser) => {
+    setSelectedUser(currentUser)
+    setChangePasswordOpen(true)
   }
 
   const openProfileModal = (user) => {
@@ -172,6 +179,14 @@ const ManageUsers = () => {
                               Recharge Sms Credit
                             </button>
                           </li>
+                          <li>
+                            <button
+                              className="dropdown-item"
+                              onClick={() => openPasswordChangeModal(user)}
+                            >
+                              Reset Password
+                            </button>
+                          </li>
                         </ul>
                       </div>
                     </td>
@@ -244,6 +259,29 @@ const ManageUsers = () => {
               selectedUser={selectedUser}
               close={() => setCreditOpen(false)} 
               reload={() => fetchUsers()}
+            />
+          </Modal.Body>
+        </Modal>
+      )}
+
+      {/* Update User Password Modal */}
+      {selectedUser && (
+        <Modal
+          size="md"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          show={changePasswordOpen}
+          onHide={() => setChangePasswordOpen(false)}
+        >
+          <Modal.Header closeButton className="bg-light">
+            <Modal.Title id="contained-modal-title-vcenter">
+              <h5>Recharge Password for <b className="text-uppercase text-info">{selectedUser?.name}</b></h5>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ResetUserPassword
+              selectedUser={selectedUser}
+              close={() => setChangePasswordOpen(false)}
             />
           </Modal.Body>
         </Modal>
