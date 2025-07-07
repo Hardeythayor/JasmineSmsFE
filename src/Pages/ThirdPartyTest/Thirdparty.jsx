@@ -280,13 +280,13 @@ const Thirdparty = () => {
                   <td>{report.created_at}</td>
                   <td>{report.content}</td>
                   <td className={`${report.skt == 'completed' ? 'text-success' : 'text-danger'} text-center`}>
-                    <i className={`fa-solid ${report.skt == 'completed' ? 'fa-check' : 'fa-xmark'}`}></i>
+                    <i className={`${report.skt == 'completed' ? 'fa-solid fa-check' : 'fa-regular fa-circle'}`}></i>
                   </td>
                   <td className={`${report.kt == 'completed' ? 'text-success' : 'text-danger'} text-center`}>
-                    <i className={`fa-solid ${report.kt == 'completed' ? 'fa-check' : 'fa-xmark'}`}></i>
+                    <i className={`${report.kt == 'completed' ? 'fa-solid fa-check' : 'fa-regular fa-circle'}`}></i>
                   </td>
                   <td className={`${report.lgu == 'completed' ? 'text-success' : 'text-danger'} text-center`}>
-                    <i className={`fa-solid ${report.lgu == 'completed' ? 'fa-check' : 'fa-xmark'}`}></i>
+                    <i className={`${report.lgu == 'completed' ? 'fa-solid fa-check' : 'fa-regular fa-circle'}`}></i>
                   </td>
                 </tr>
               ))}
