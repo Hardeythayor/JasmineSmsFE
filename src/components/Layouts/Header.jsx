@@ -212,8 +212,8 @@ const Header = () => {
                                 <ul className="nav flex-column mb-2">
                                     <li className="nav-item paragraph2"><NavLink className="nav-link text-dark" to="/" id="mobile-sidebar-send-text">{t("homePage.pageHeading")}</NavLink></li>
                                     <li className="nav-item paragraph2">
-                                        {/* <NavLink className="nav-link text-dark" to="/test" id="mobile-sidebar-third-party-test">{t("thirdPartyTest.pageHeading")}</NavLink> */}
-                                        <a className="nav-link text-dark" href="https://t.me/HIP100" id="mobile-sidebar-third-party-test">{t("thirdPartyTest.pageHeading")}</a>
+                                        <NavLink className="nav-link text-dark" to="/test" id="mobile-sidebar-third-party-test">{t("thirdPartyTest.pageHeading")}</NavLink>
+                                        {/* <a className="nav-link text-dark" href="https://t.me/HIP100" id="mobile-sidebar-third-party-test">{t("thirdPartyTest.pageHeading")}</a> */}
                                     </li>
                                 </ul>
                                 <h6 className="sidebar-heading mt-4 mb-1 sub-heading">{t("sideBarHeading.1")}</h6>
