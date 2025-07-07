@@ -237,7 +237,7 @@ const Thirdparty = () => {
               className="btn px-4 btn-dark btn-text2 send-hover"
               id="start-testing-btn"
               onClick={sendMessage}
-              disabled={loading}
+              disabled={loading || testLoading}
             >
               {loading ? (
                 <div class="spinner-border spinner-border-sm text-light"></div>
@@ -297,7 +297,7 @@ const Thirdparty = () => {
             </tbody>
           </table>
         </div>
-        {/* {testLoading && <Loader />} */}
+        {testLoading && <Loader />}
       </div>
 
       {/* <div id="testModal" className="modal-overlay" style={{ display: "none" }}>

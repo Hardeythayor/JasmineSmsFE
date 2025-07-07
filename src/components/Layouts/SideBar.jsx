@@ -20,7 +20,7 @@ const SideBar = () => {
                   {t("homePage.pageHeading")}
                 </NavLink>
               </li>
-              {/* <li className="nav-item paragraph2">
+              <li className="nav-item paragraph2">
                 <NavLink
                   className="nav-link"
                   to="/test"
@@ -28,8 +28,8 @@ const SideBar = () => {
                 >
                   <i className="fa-regular fa-message fa-sm text-black me-3"></i>{t("thirdPartyTest.pageHeading")}
                 </NavLink>
-              </li> */}
-              <li className="nav-item paragraph2">
+              </li>
+              {/* <li className="nav-item paragraph2">
                 <a
                   className="nav-link"
                   href="https://t.me/HIP100"
@@ -37,7 +37,7 @@ const SideBar = () => {
                 >
                   <i className="fa-regular fa-message fa-sm text-black me-3"></i>{t("thirdPartyTest.pageHeading")}
                 </a>
-              </li>
+              </li> */}
             </ul>
             <h6 className="sidebar-heading mt-4 mb-1 sub-heading">
               {t("sideBarHeading.1")}
