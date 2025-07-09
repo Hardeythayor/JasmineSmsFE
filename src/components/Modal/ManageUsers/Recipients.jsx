@@ -14,7 +14,11 @@ const Recipients = ({ close, message }) => {
                 {message?.send_type == 'immediately' ? 'Send immediately' : 'Reserved'} ( {message?.created_at} )
               </p>
               <p className="paragraph mb-0">details</p>
-              <p className="paragraph2 mt-0 mb-0">{message?.content}</p>
+              <p className="paragraph2 mt-0 mb-0">
+                <div style={{ whiteSpace: 'pre-wrap' }}>
+                  {message?.content}
+                </div>
+              </p>
             </div>
           </div>
 
