@@ -170,7 +170,11 @@ const ShipmentDetails = () => {
                                 </p>
                                 <p className="mb-2 paragraph">{detailsText[3]}</p>
                                 <div className="bg-light mb-2 p-2 rounded-lg">
-                                  <p className="paragraph2 m-0">{report.content}</p>
+                                  <p className="paragraph2 m-0">
+                                    <div style={{ whiteSpace: 'pre-wrap' }}>
+                                      {report.content}
+                                    </div>
+                                  </p>
                                 </div>
                               </div>
 

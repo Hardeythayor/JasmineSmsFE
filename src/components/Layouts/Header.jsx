@@ -49,7 +49,7 @@ const Header = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <a className="navbar-brand d-flex align-items-center" href="#">
+                <NavLink className="navbar-brand d-flex align-items-center" to="/">
                     <img
                     src={logo}
                     alt="SeaSMS Logo"
@@ -58,7 +58,7 @@ const Header = () => {
                     className="me-2"
                     />
                     {/* <!-- <span className="fw-bold">SeaSMS</span> --> */}
-                </a>
+                </NavLink>
                 </div>
                 <div className="d-flex align-items-center ms-auto">
                 {/* <!-- <span className="badge rounded-pill paragraph2 d-none d-lg-inline me-4">806 cases</span> --> */}
