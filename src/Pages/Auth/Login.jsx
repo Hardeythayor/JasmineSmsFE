@@ -66,7 +66,7 @@ const Login = () => {
                 })
                 .catch(err => {
                     console.log(err.response);
-                    toast.error(t("otherText.6"))
+                    toast.error(t("otherText.10"))
                     setErrorMsg(err.response.data.message)
                 })
                 .finally(() => setLoading(false))
@@ -78,9 +78,9 @@ const Login = () => {
       <div className="form-container shadow-sms">
         <img src={logo} width='240' height='62' alt="SeaSMS Logo" className="img-fluid" />
 
-        {errorMsg && <div className='alert alert-danger py-2'>
+        {/* {errorMsg && <div className='alert alert-danger py-2'>
             <i className='mdi mdi-alert-circle-outline'></i> {errorMsg}
-        </div>}
+        </div>} */}
 
         <form id="loginForm" onSubmit={handleSubmit}>
           <div className="mb-3">

@@ -7,7 +7,7 @@ import useAuth from "../../hooks/useAuthContext";
 import Loader from "../../components/utilities/Loader/Loader";
 import { useTranslation } from "react-i18next";
 
-const pageLengths = [91, 182, 273, 364, 455, 546];
+const pageLengths = [71, 142, 213, 284, 355, 426]
 
 const Thirdparty = () => {
   const {t} = useTranslation()
@@ -117,6 +117,10 @@ const Thirdparty = () => {
     e.preventDefault();
     const pageCount = await caclulateSmsPages();
     // return console.log(formData);
+    if(formData.content.length > 70) {
+      toast.error(t("otherText.11"))
+      return
+    }
     
     if (formData.recipientCount > 0) {
       setLoading(true);
@@ -201,10 +205,10 @@ const Thirdparty = () => {
 
               <span
                 className={`ms-auto small paragraph flex-shrink-0 ${
-                  formData?.content?.length > 90 ? "text-yellow" : ""
+                  formData?.content?.length > 70 ? "text-yellow" : ""
                 }`}
               >
-                {formData?.content?.length}/90byte
+                {formData?.content?.length}/70byte
               </span>
 
               <button

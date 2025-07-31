@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 const hours = shuffleArray.generateNumbersWithLeadingZeros(24);
 const minutes = shuffleArray.generateNumbersWithLeadingZeros(60);
 const validPrefixes = ['8210', '010', '10', '23490', '23470', '23481'];
-const pageLengths = [91, 182, 273, 364, 455, 546]
+const pageLengths = [71, 142, 213, 284, 355, 426]
 const today = new Date();
 const dateString = today.toISOString().split('T')[0];
 const hourString = today.toISOString().split('T')[1].slice(0,2)
@@ -257,6 +257,11 @@ const fetchSmsCharge = () => {
     e.preventDefault()
     const numbers = await handleValidation();
     const pageCount = await caclulateSmsPages()
+
+    if(formData.content.length > 70) {
+      toast.error(t("otherText.11"))
+      return
+    }
     
     if(numbers) {
         setLoading(true)
@@ -332,8 +337,8 @@ const fetchSmsCharge = () => {
                     <span className="d-none d-sm-inline ms-1">{t("messageText.1")}</span>
                   </a>
 
-                  <span className={`ms-auto small paragraph flex-shrink-0 ${formData?.content?.length > 90 ? 'text-yellow' : ''}`}>
-                    {formData?.content?.length}/90byte
+                  <span className={`ms-auto small paragraph flex-shrink-0 ${formData?.content?.length > 70 ? 'text-yellow' : ''}`}>
+                    {formData?.content?.length}/70byte
                   </span>
 
                   <button

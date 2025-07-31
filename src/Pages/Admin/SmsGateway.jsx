@@ -72,7 +72,7 @@ const SmsGateway = () => {
                 gateways.map((gateway, i) => (
                   <tr key={gateway.id}>
                     <td>{i+1}</td>
-                    <td>{gateway.name}</td>
+                    <td>{gateway.id}</td>
                     <td>{Number(gateway.sms_charge)}</td>
                     <td>
                       <span
@@ -144,7 +144,7 @@ const SmsGateway = () => {
         >
           <Modal.Header closeButton className="bg-light">
             <Modal.Title id="contained-modal-title-vcenter">
-              <h5>SMS Charge for <b className="text-uppercase text-info">{selectedGateway.name}</b> Gateway</h5>
+              <h5>SMS Charge for <b className="text-uppercase text-info">{selectedGateway.id}</b> Gateway</h5>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
