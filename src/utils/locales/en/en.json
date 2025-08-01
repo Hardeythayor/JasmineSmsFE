@@ -17,7 +17,7 @@
     ],
     "otherText": [
         "Message Unit Price Guide", "credits", "Profile Settings", "Logout", "inquiry", "Message sent successfully", "An error occured. Please, try again",
-        "Login Successful", "Registration Successful", "Invalid Numbers", "Login failed \n ID or password does not match", "The message length exceeded 70 bytes"
+        "Login Successful", "Registration Successful", "Invalid Numbers", "Login failed \nID or password does not match", "The message length exceeded 70 bytes"
     ],
     "homePage": {
         "pageHeading": "Send text",
