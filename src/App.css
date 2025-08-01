@@ -4,6 +4,11 @@
   width: 100%;
 }
 
+.Toastify__toast {
+  white-space: pre-wrap !important;
+  min-width: 350px
+}
+
 
 body {
   font-family: "Inter", sans-serif;

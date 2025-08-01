@@ -277,7 +277,7 @@ const fetchSmsCharge = () => {
                     })
                     .catch(err => {
                         console.log(err.response);
-                        toast.error(t("otherText.6"))
+                        toast.error(err.response.data.message);
                     })
                     .finally(() => setLoading(false))
     }
