@@ -22,7 +22,7 @@ const UserProfile = ({ close, selectedUser }) => {
     const [pageCount, setPageCount] = useState(1);
 
     //  pagination function
-    const handlePageChange = (_, value) => {
+    const handlePageChange = (e, value) => {
         setPage(value);
     };
 

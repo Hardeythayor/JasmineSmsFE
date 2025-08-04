@@ -8,6 +8,7 @@ const AuthContextProvider = ({children}) => {
         userInfo: null,
         authIsReady: false,
         smsCharge: 0,
+        spamWords: [],
         smsInfo: null
     })
 
@@ -54,6 +55,18 @@ const AuthContextProvider = ({children}) => {
             })
     }
 
+    const fetchSpamWords = () => {
+        axiosInstance.post("/user/spam_filter", {status: 'active', extract: true})
+            .then(res => {
+                setUserData(prevUserData => (
+                    {...prevUserData, spamWords: res.data.data}
+                ))
+            })
+            .catch(err => {
+                console.log(err.response);
+            })
+    }
+
     const fetchSmsAnalytics = () => {
         axiosInstance.get('/user/dashboard/me')
         .then(res => {
@@ -74,6 +87,7 @@ const AuthContextProvider = ({children}) => {
         if(userData.userInfo) {
             fetchSmsCharge()
             fetchSmsAnalytics()
+            fetchSpamWords()
         }
     }, [userData.userInfo])
 
@@ -82,7 +96,8 @@ const AuthContextProvider = ({children}) => {
         setUserData,
         resetUser,
         fetchUserDetails,
-        fetchSmsAnalytics
+        fetchSmsAnalytics,
+        fetchSpamWords
     }
 
     return (
