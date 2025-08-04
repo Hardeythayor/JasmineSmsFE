@@ -1,6 +1,7 @@
 import React from 'react'
 import InvitationCode from './InvitationCodes/InvitationCode'
 import ThirdPartyNumber from './ThirdPartyNumbers/ThirdPartyNumber'
+import SpamFilters from './SpamFilters/SpamFilters'
 
 const OtherSettingsIndex = () => {
   return (
@@ -15,6 +16,9 @@ const OtherSettingsIndex = () => {
             </div>
             <div className="col-lg-6">
                 <ThirdPartyNumber />
+            </div>
+            <div className="col-lg-6">
+                <SpamFilters />
             </div>
         </div>
     </div>

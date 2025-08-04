@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuthContext";
 import Loader from "../../components/utilities/Loader/Loader";
 import { useTranslation } from "react-i18next";
+import shuffleArray from "../../hooks/useArrayShuffle";
 
 const pageLengths = [71, 142, 213, 284, 355, 426]
 
@@ -14,6 +15,8 @@ const Thirdparty = () => {
   const {pageHeading, pageSubHeading, tableText} = t("thirdPartyTest")
 
   const {userData} = useAuth()
+
+  const forbiddenWords = userData?.spamWords
 
   const textareaRef = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -119,6 +122,11 @@ const Thirdparty = () => {
     // return console.log(formData);
     if(formData.content.length > 70) {
       toast.error(t("otherText.11"))
+      return
+    }
+
+    if(!shuffleArray.checkSpamWords(formData.content, forbiddenWords)) {
+      toast.error(t("otherText.12"));
       return
     }
     

@@ -21,9 +21,26 @@ const generateNumbersWithLeadingZeros = (num) => {
   return numbers;
 }
 
+const checkSpamWords = (input, forbiddenWords) => {
+    // Convert the input text to lowercase for case-insensitive checking.
+    const lowerCaseInput = input.toLowerCase();
+
+    // Iterate through the list of forbidden words.
+    for (const word of forbiddenWords) {
+      // Check if the lowercase input text includes the lowercase forbidden word.
+      if (lowerCaseInput.includes(word.toLowerCase())) {
+        return false; // Validation fails.
+      }
+    }
+
+    // If the loop completes without finding any forbidden words, validation passes.
+    return true;
+};
+
 const shuffleArray = {
     fisherYatesShuffle,
-    generateNumbersWithLeadingZeros
+    generateNumbersWithLeadingZeros,
+    checkSpamWords
 }
 
 export default shuffleArray

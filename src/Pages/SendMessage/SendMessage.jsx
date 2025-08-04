@@ -5,6 +5,7 @@ import shuffleArray from "../../hooks/useArrayShuffle";
 import { toast } from "react-toastify";
 import axiosInstance from "../../hooks/axiosInstance";
 import { useTranslation } from "react-i18next";
+import useAuth from "../../hooks/useAuthContext";
 
 const hours = shuffleArray.generateNumbersWithLeadingZeros(24);
 const minutes = shuffleArray.generateNumbersWithLeadingZeros(60);
@@ -16,6 +17,9 @@ const hourString = today.toISOString().split('T')[1].slice(0,2)
 const minuteString = today.toISOString().split('T')[1].slice(3,5)
 
 const SendMessage = () => {
+  const { userData } = useAuth();
+  const forbiddenWords = userData?.spamWords
+
   const {t} = useTranslation()
   const {
     pageHeading, pageSubHeading, recipientField, recentShipmentField, sendingSettingsField
@@ -260,6 +264,11 @@ const fetchSmsCharge = () => {
 
     if(formData.content.length > 70) {
       toast.error(t("otherText.11"))
+      return
+    }
+
+    if(!shuffleArray.checkSpamWords(formData.content, forbiddenWords)) {
+      toast.error(t("otherText.12"));
       return
     }
     
